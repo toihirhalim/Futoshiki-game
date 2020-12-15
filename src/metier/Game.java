@@ -10,5 +10,15 @@ package metier;
  * @author Toihir
  */
 public class Game {
+    public Game(){}
     
+    public boolean check(Node [][] nodes){
+        boolean valid = true;
+        /*for(int i = 0; i < nodes.length; i++)
+            for(int j = 0;  j < nodes.length; j++)
+                if(isSafe(Node [][] nodes, i, j, ))
+           */     
+                
+        return valid;
+    }
 }
