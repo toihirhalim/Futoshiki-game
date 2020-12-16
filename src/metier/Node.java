@@ -16,30 +16,30 @@ public class Node {
     public static String sup = ">";
     public static String inf = "<";
     
-    private String value;
+    private int value;
     private Color color;
     private String rowConstraint;
     private String columnConstraint;
 
     public Node() { }
     
-    public Node(String value, Color color, String rowConstraint, String columnConstraint) {
+    public Node(int value, Color color, String rowConstraint, String columnConstraint) {
         this.value = value;
         this.color = color;
         this.rowConstraint = rowConstraint;
         this.columnConstraint = columnConstraint;
     }
     
-    public Node(String value, Color color) {
+    public Node(int value, Color color) {
         this.value = value;
         this.color = color;
     }
 
-    public String getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(int value) {
         this.value = value;
     }
 
@@ -48,7 +48,9 @@ public class Node {
     }
 
     public void setColor(Color color) {
-        this.color = color;
+        if(this.color != Color.black){
+            this.color = color;
+        }
     }
 
     public String getRowConstraint() {
@@ -83,7 +85,9 @@ public class Node {
     
     @Override
     public String toString() {
-        return value;
+        String col = this.color==Color.red ? "r" : this.color==Color.green ? "g" : "b";
+        
+        return "" + value + "color: " + col;
     }
     
 }
