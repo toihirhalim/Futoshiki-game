@@ -20,19 +20,21 @@ public class Node {
     private Color color;
     private String rowConstraint;
     private String columnConstraint;
+    private boolean initial = false;
 
     public Node() { }
     
-    public Node(int value, Color color, String rowConstraint, String columnConstraint) {
+    public Node(int value, String rowConstraint, String columnConstraint) {
         this.value = value;
-        this.color = color;
+        this.color = Color.black;
         this.rowConstraint = rowConstraint;
         this.columnConstraint = columnConstraint;
+        this.initial = true;
     }
-    
-    public Node(int value, Color color) {
-        this.value = value;
-        this.color = color;
+
+    public Node(String rowConstraint, String columnConstraint) {
+        this.rowConstraint = rowConstraint;
+        this.columnConstraint = columnConstraint;
     }
 
     public int getValue() {
@@ -48,15 +50,21 @@ public class Node {
     }
 
     public void setColor(Color color) {
-        if(this.color != Color.black){
-            this.color = color;
-        }
+        this.color = color;
     }
 
     public String getRowConstraint() {
         return rowConstraint;
     }
 
+    public boolean isInitial() {
+        return initial;
+    }
+    
+    public void setInitial(boolean val) {
+        this.initial = val;
+    }
+    
     public void setRowConstraint(String rowConstraint) {
         if(rowConstraint.equals(inf) || rowConstraint.equals(sup)) this.rowConstraint = rowConstraint;
         else this.rowConstraint = null;
@@ -81,6 +89,20 @@ public class Node {
     
     public boolean hasConstraint(){
         return this.hasColumnConstraint() || this.hasRowConstraint();
+    }
+    
+    public boolean checkNextRowValue(int nextVal){
+        if(this.hasRowConstraint()){
+            return this.rowConstraint.equals(inf) ? this.value < nextVal : this.value > nextVal;
+        }
+        return true;
+    }
+    
+    public boolean checkNextColumnValue(int nextVal){
+        if(this.hasColumnConstraint()){
+            return this.columnConstraint.equals(inf) ? this.value < nextVal : this.value > nextVal;
+        }
+        return true;
     }
     
     @Override
