@@ -35,6 +35,7 @@ public class Node {
     public Node(String rowConstraint, String columnConstraint) {
         this.rowConstraint = rowConstraint;
         this.columnConstraint = columnConstraint;
+        this.value = 0;
     }
 
     public int getValue() {
@@ -108,8 +109,9 @@ public class Node {
     @Override
     public String toString() {
         String col = this.color==Color.red ? "r" : this.color==Color.green ? "g" : "b";
-        String c = columnConstraint != null ? columnConstraint : "";
-        return "" + value + " " + col + " " + c;
+        String c = columnConstraint != null ? columnConstraint : " ";
+        String val = value != 0 ? "" + value : " ";
+        return "" + val + " " + col + " " + c;
     }
     
 }

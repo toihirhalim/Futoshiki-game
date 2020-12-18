@@ -31,14 +31,18 @@ public class Futoshiki {
                 nodes[i][j].setInitial(false);
             }
         }
-        for(int j = 0; j < 3; j++){
+        /*for(int j = 0; j < 3; j++){
             nodes[sc.nextInt(N-1)][sc.nextInt(N-1)].setRowConstraint("<");
         }
         for(int j = 0; j < 3; j++){
             nodes[sc.nextInt(N-1)][sc.nextInt(N-1)].setColumnConstraint(">");
-        }
+        }*/
         game.checkGame(nodes);
-        game.affiche(nodes);
+        Game.affiche(nodes);
+        /*if (Backtracking.solve(nodes, 0, 0))
+            Game.affiche(nodes);
+        else
+            System.out.println("No Solution exists");*/
     }
     
 }

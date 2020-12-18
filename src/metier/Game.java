@@ -58,7 +58,8 @@ public class Game {
         return valid;
     }
     
-    public void affiche(Node [][] nodes){
+    public static void affiche(Node [][] nodes){
+        System.out.println("----------------------------------------");
         for(int i = 0; i < nodes.length; i++){
             for(int j = 0; j < nodes.length; j++){
                 System.out.print(nodes[i][j] + "\t");
@@ -70,5 +71,6 @@ public class Game {
             }
             System.out.println();
         }
+        System.out.println("----------------------------------------");
     }
 }
