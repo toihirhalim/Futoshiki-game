@@ -108,8 +108,8 @@ public class Node {
     @Override
     public String toString() {
         String col = this.color==Color.red ? "r" : this.color==Color.green ? "g" : "b";
-        
-        return "" + value + " " + col + " " + rowConstraint;
+        String c = columnConstraint != null ? columnConstraint : "";
+        return "" + value + " " + col + " " + c;
     }
     
 }

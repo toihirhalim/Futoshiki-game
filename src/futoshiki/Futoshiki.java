@@ -22,22 +22,29 @@ public class Futoshiki {
         System.out.println("hello world");
         Random sc = new Random();
         Node [][] nodes = new Node[4][4];
+        Game game = new Game();
         
         for(int i = 0; i < nodes.length; i++){
             for(int j = 0; j < nodes.length; j++){
-                nodes[i][j] = new Node(sc.nextInt(5)+1, null, null);
+                nodes[i][j] = new Node(sc.nextInt(4)+1, null, null);
+                nodes[i][j].setInitial(false);
             }
         }
-        
+        for(int j = 0; j < 3; j++){
+            nodes[sc.nextInt(3)][sc.nextInt(3)].setRowConstraint("<");
+        }
+        for(int j = 0; j < 3; j++){
+            nodes[sc.nextInt(3)][sc.nextInt(3)].setColumnConstraint(">");
+        }
+        game.checkGame(nodes);
         for(int i = 0; i < nodes.length; i++){
-            String [] columnConstaint = new String[4];
             for(int j = 0; j < nodes.length; j++){
                 System.out.print(nodes[i][j] + "\t");
-                columnConstaint[i] = nodes[i][j].getColumnConstraint();
             }
             System.out.println();
             for(int j = 0; j < nodes.length; j++){
-                System.out.print(columnConstaint[j] + "\t\t");
+                String col = nodes[i][j].getRowConstraint() != null ? nodes[i][j].getRowConstraint() : " ";
+                System.out.print(col + "\t");
             }
             System.out.println();
         }
