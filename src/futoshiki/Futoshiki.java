@@ -24,13 +24,23 @@ public class Futoshiki {
         int N = 4;
         Node [][] nodes = new Node[N][N];
         Game game = new Game();
+        //Backtracking bct = new Backtracking();
         
         for(int i = 0; i < nodes.length; i++){
             for(int j = 0; j < nodes.length; j++){
-                nodes[i][j] = new Node(sc.nextInt(N)+1, null, null);
+                nodes[i][j] = new Node( null, null);
                 nodes[i][j].setInitial(false);
             }
         }
+        
+        for(int j = 0; j < 4; j++){
+            int rd1 = sc.nextInt(N-1);
+            int rd2 = sc.nextInt(N-1);
+            int rd3 = sc.nextInt(N-1);
+            nodes[rd1][rd2].setValue(rd3);
+            nodes[rd1][rd2].setInitial(true);
+        }
+        
         /*for(int j = 0; j < 3; j++){
             nodes[sc.nextInt(N-1)][sc.nextInt(N-1)].setRowConstraint("<");
         }
@@ -38,11 +48,12 @@ public class Futoshiki {
             nodes[sc.nextInt(N-1)][sc.nextInt(N-1)].setColumnConstraint(">");
         }*/
         game.checkGame(nodes);
-        Game.affiche(nodes);
-        /*if (Backtracking.solve(nodes, 0, 0))
-            Game.affiche(nodes);
+        game.print(nodes);
+        //bct.nodes = nodes;
+        if (Backtracking.solve(nodes, 0, 0))
+            game.print(nodes);
         else
-            System.out.println("No Solution exists");*/
+            System.out.println("No Solution exists");
     }
     
 }

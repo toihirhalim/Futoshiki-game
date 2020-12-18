@@ -58,7 +58,7 @@ public class Game {
         return valid;
     }
     
-    public static void affiche(Node [][] nodes){
+    public void print(Node [][] nodes){
         System.out.println("----------------------------------------");
         for(int i = 0; i < nodes.length; i++){
             for(int j = 0; j < nodes.length; j++){
