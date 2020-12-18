@@ -45,11 +45,11 @@ public class Game {
                     }
                 }
                 
-                if(j < nodes.length - 1 && nodes[i][j].hasRowConstraint() && !nodes[i][j].checkNextRowValue(nodes[i+1][j].getValue())){
+                if(i < nodes.length - 1 && nodes[i][j].hasRowConstraint() && !nodes[i][j].checkNextRowValue(nodes[i+1][j].getValue())){
                     nodes[i][j].setColor(Color.red);
                     nodes[i+1][j].setColor(Color.red);
                 }
-                if(i < nodes.length - 1  && nodes[i][j].hasColumnConstraint() && !nodes[i][j].checkNextColumnValue(nodes[i][j+1].getValue())){
+                if(j < nodes.length - 1  && nodes[i][j].hasColumnConstraint() && !nodes[i][j].checkNextColumnValue(nodes[i][j+1].getValue())){
                     nodes[i][j].setColor(Color.red);
                     nodes[i][j+1].setColor(Color.red);
                 }

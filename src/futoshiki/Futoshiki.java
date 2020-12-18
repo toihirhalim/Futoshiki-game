@@ -5,6 +5,7 @@
  */
 package futoshiki;
 
+import java.awt.Color;
 import java.util.Random;
 import metier.*;
 
@@ -33,25 +34,28 @@ public class Futoshiki {
             }
         }
         
-        for(int j = 0; j < 4; j++){
+        /*for(int j = 0; j < 4; j++){
             int rd1 = sc.nextInt(N-1);
             int rd2 = sc.nextInt(N-1);
-            int rd3 = sc.nextInt(N-1);
+            int rd3 = sc.nextInt(N)+1;
             nodes[rd1][rd2].setValue(rd3);
             nodes[rd1][rd2].setInitial(true);
-        }
+            nodes[rd1][rd2].setColor(Color.black);
+        }*/
         
-        /*for(int j = 0; j < 3; j++){
+        for(int j = 0; j < 1; j++){
             nodes[sc.nextInt(N-1)][sc.nextInt(N-1)].setRowConstraint("<");
         }
-        for(int j = 0; j < 3; j++){
+        /*for(int j = 0; j < 1; j++){
             nodes[sc.nextInt(N-1)][sc.nextInt(N-1)].setColumnConstraint(">");
         }*/
-        game.checkGame(nodes);
+        //game.checkGame(nodes);
         game.print(nodes);
         //bct.nodes = nodes;
-        if (Backtracking.solve(nodes, 0, 0))
+        if (Backtracking.solve(nodes, 0, 0)){
+            game.checkGame(nodes);
             game.print(nodes);
+        }
         else
             System.out.println("No Solution exists");
     }

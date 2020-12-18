@@ -35,6 +35,7 @@ public class Node {
     public Node(String rowConstraint, String columnConstraint) {
         this.rowConstraint = rowConstraint;
         this.columnConstraint = columnConstraint;
+        this.color = Color.green;
         this.value = 0;
     }
 

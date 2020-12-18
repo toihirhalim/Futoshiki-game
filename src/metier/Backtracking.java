@@ -5,6 +5,8 @@
  */
 package metier;
 
+import java.awt.Color;
+
 /**
  *
  * @author Toihir
@@ -50,7 +52,29 @@ public class Backtracking {
             if (nodes[x][col].getValue() == num)
                 return false;
  
+        int i = row;
+        int j = col;
         
+        if(i < nodes.length - 1 && nodes[i][j].hasRowConstraint() && !nodes[i][j].checkNextRowValue(nodes[i+1][j].getValue())){
+            return false;
+        }
+        if(j < nodes.length - 1  && nodes[i][j].hasColumnConstraint() && !nodes[i][j].checkNextColumnValue(nodes[i][j+1].getValue())){
+            return false;
+        }
+        
+        i = row -1;
+        j = col;
+        
+        if(i >= 0 && nodes[i][j].hasRowConstraint() && !nodes[i][j].checkNextRowValue(nodes[i+1][j].getValue())){
+            return false;
+        }
+        
+        i = row;
+        j = col -1;
+        
+        if(j >= 0  && nodes[i][j].hasColumnConstraint() && !nodes[i][j].checkNextColumnValue(nodes[i][j+1].getValue())){
+            return false;
+        }
  
         return true;
     }
