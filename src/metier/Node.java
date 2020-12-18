@@ -94,17 +94,42 @@ public class Node {
     }
     
     public boolean checkNextRowValue(int nextVal){
-        if(this.hasRowConstraint()){
+        if(this.hasRowConstraint() && nextVal != 0){
             return this.rowConstraint.equals(inf) ? this.value < nextVal : this.value > nextVal;
         }
         return true;
     }
     
     public boolean checkNextColumnValue(int nextVal){
-        if(this.hasColumnConstraint()){
+        if(this.hasColumnConstraint() && nextVal != 0){
             return this.columnConstraint.equals(inf) ? this.value < nextVal : this.value > nextVal;
         }
         return true;
+    }
+    
+    public boolean validConstraint(Node top, Node left, Node bottom, Node right,int val){
+        boolean test = true;
+        if(top != null && top.getValue() != 0 && top.hasRowConstraint()){
+            test =  top.rowConstraint.equals(inf)? top.value < val : top.value > val;
+            if(!test) return test;
+        }
+        
+        if(left != null && left.getValue() != 0 && left.hasColumnConstraint()){
+            test = left.columnConstraint.equals(inf) ? left.value < val : left.value > val;
+            if(!test) return test;
+        }
+        
+        if(bottom != null && bottom.getValue() != 0 && this.hasRowConstraint()){
+            test = this.rowConstraint.equals(inf) ? val < bottom.getValue() : val > bottom.getValue();
+            if(!test) return test;
+        }
+        
+        if(right != null && right.getValue() != 0 && this.hasColumnConstraint()){
+            test = this.columnConstraint.equals(inf) ? val < right.getValue() : val > right.getValue();
+            if(!test) return test;
+        }
+        
+        return test;
     }
     
     @Override

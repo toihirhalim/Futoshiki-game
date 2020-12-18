@@ -12,13 +12,12 @@ import java.awt.Color;
  * @author Toihir
  */
 public class Backtracking {
-    static int N = 4;
     
     public static boolean solve(Node [][] nodes, int row, int col){
-        if (row == N - 1 && col == N)
+        if (row == nodes.length - 1 && col == nodes.length)
             return true;
  
-        if (col == N) {
+        if (col == nodes.length) {
             row++;
             col = 0;
         }
@@ -26,11 +25,10 @@ public class Backtracking {
         if (nodes[row][col].getValue() != 0)
             return solve(nodes, row, col + 1);
  
-        for (int num = 1; num <= N ; num++) {
+        for (int num = 1; num <= nodes.length ; num++) {
  
             if (isSafe(nodes, row, col, num)) {
                 nodes[row][col].setValue(num);
- 
                 if (solve(nodes, row, col + 1))
                     return true;
             }
@@ -52,27 +50,12 @@ public class Backtracking {
             if (nodes[x][col].getValue() == num)
                 return false;
  
-        int i = row;
-        int j = col;
+        Node top = row - 1 >= 0 ? nodes[row -1][col] : null;
+        Node left = col - 1 >= 0 ? nodes[row][col -1] : null;
+        Node bottom = row + 1 < nodes.length ? nodes[row +1][col] : null;
+        Node right = col + 1 < nodes.length ? nodes[row][col +1] : null;
         
-        if(i < nodes.length - 1 && nodes[i][j].hasRowConstraint() && !nodes[i][j].checkNextRowValue(nodes[i+1][j].getValue())){
-            return false;
-        }
-        if(j < nodes.length - 1  && nodes[i][j].hasColumnConstraint() && !nodes[i][j].checkNextColumnValue(nodes[i][j+1].getValue())){
-            return false;
-        }
-        
-        i = row -1;
-        j = col;
-        
-        if(i >= 0 && nodes[i][j].hasRowConstraint() && !nodes[i][j].checkNextRowValue(nodes[i+1][j].getValue())){
-            return false;
-        }
-        
-        i = row;
-        j = col -1;
-        
-        if(j >= 0  && nodes[i][j].hasColumnConstraint() && !nodes[i][j].checkNextColumnValue(nodes[i][j+1].getValue())){
+        if(!nodes[row][col].validConstraint(top, left, bottom, right, num)){
             return false;
         }
  
