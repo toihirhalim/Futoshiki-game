@@ -6,12 +6,48 @@
 package metier;
 
 import java.awt.Color;
+import java.util.Random;
 /**
  *
  * @author Toihir
  */
 public class Game {
     public Game(){}
+    
+    public Node [][] getGame(int N){
+        
+        return null;
+    }
+    
+    public Node [][] gameInit(int N){
+        Random sc = new Random();
+        
+        Node [][] nodes = new Node[N][N];
+        
+        for(int i = 0; i < nodes.length; i++){
+            for(int j = 0; j < nodes.length; j++){
+                nodes[i][j] = new Node( null, null);
+                nodes[i][j].setInitial(false);
+            }
+        }
+        
+        nodes[0][3].setValue(3);
+        nodes[2][2].setValue(3);
+        nodes[0][3].setValue(3);
+        nodes[2][2].setInitial(true);
+        nodes[0][3].setInitial(true);
+        nodes[2][2].setInitial(true);
+        nodes[2][2].setColor(Color.black);
+        nodes[0][3].setColor(Color.black);
+        nodes[2][2].setColor(Color.black);
+        
+        nodes[0][0].setRowConstraint(">");
+        nodes[1][1].setRowConstraint(">");
+        nodes[2][1].setRowConstraint(">");
+        nodes[1][2].setColumnConstraint("<");
+        
+        return nodes;
+    }
     
     public boolean checkGame(Node [][] nodes){
         boolean valid = true;

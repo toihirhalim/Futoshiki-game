@@ -5,8 +5,6 @@
  */
 package futoshiki;
 
-import java.awt.Color;
-import java.util.Random;
 import metier.*;
 
 /**
@@ -21,49 +19,9 @@ public class Futoshiki {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("hello world");
-        Random sc = new Random();
-        int N = 4;
-        Node [][] nodes = new Node[N][N];
         Game game = new Game();
-        
-        for(int i = 0; i < nodes.length; i++){
-            for(int j = 0; j < nodes.length; j++){
-                nodes[i][j] = new Node( null, null);
-                nodes[i][j].setInitial(false);
-            }
-        }
-        
-        /*for(int j = 0; j < 4; j++){
-            int rd1 = sc.nextInt(N-1);
-            int rd2 = sc.nextInt(N-1);
-            int rd3 = sc.nextInt(N)+1;
-            nodes[rd1][rd2].setValue(rd3);
-            nodes[rd1][rd2].setInitial(true);
-            nodes[rd1][rd2].setColor(Color.black);
-        }
-        
-        for(int j = 0; j < 1; j++){
-            nodes[sc.nextInt(N-1)][sc.nextInt(N-1)].setRowConstraint("<");
-        }
-        for(int j = 0; j < 1; j++){
-            nodes[sc.nextInt(N-1)][sc.nextInt(N-1)].setColumnConstraint(">");
-        }*/
-        //game.checkGame(nodes);
-        
-        nodes[0][3].setValue(3);
-        nodes[2][2].setValue(3);
-        nodes[0][3].setValue(3);
-        nodes[2][2].setInitial(true);
-        nodes[0][3].setInitial(true);
-        nodes[2][2].setInitial(true);
-        nodes[2][2].setColor(Color.black);
-        nodes[0][3].setColor(Color.black);
-        nodes[2][2].setColor(Color.black);
-        
-        nodes[0][0].setRowConstraint(">");
-        nodes[1][1].setRowConstraint(">");
-        nodes[2][1].setRowConstraint(">");
-        nodes[1][2].setColumnConstraint("<");
+        int N = 4;
+        Node [][] nodes = game.gameInit(N);
         
         game.print(nodes);
         if (Backtracking.solve(nodes, 0, 0)){
