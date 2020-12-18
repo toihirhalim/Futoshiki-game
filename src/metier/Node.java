@@ -109,7 +109,7 @@ public class Node {
     public String toString() {
         String col = this.color==Color.red ? "r" : this.color==Color.green ? "g" : "b";
         
-        return "" + value + "color: " + col;
+        return "" + value + " " + col + " " + rowConstraint;
     }
     
 }
