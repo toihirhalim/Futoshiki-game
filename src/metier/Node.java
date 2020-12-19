@@ -24,6 +24,20 @@ public class Node {
 
     public Node() { }
     
+    public Node(String value, String color, String rowConstraint, String columnConstraint, String initial) {
+        int val;
+        try{
+            val = Integer.parseInt(value);
+        }catch(Exception e){
+            val = 0;
+        }
+        this.value = val;
+        this.color = color != null ? color.equals("r") ? Color.red : color.equals("g") ? Color.green : Color.black : Color.black;
+        this.rowConstraint = rowConstraint;
+        this.columnConstraint = columnConstraint;
+        this.initial = initial != null ? initial.equals("true") ? true : false : false;
+    }
+    
     public Node(int value, String rowConstraint, String columnConstraint) {
         this.value = value;
         this.color = Color.black;
@@ -31,7 +45,7 @@ public class Node {
         this.columnConstraint = columnConstraint;
         this.initial = true;
     }
-
+    
     public Node(String rowConstraint, String columnConstraint) {
         this.rowConstraint = rowConstraint;
         this.columnConstraint = columnConstraint;
@@ -41,6 +55,10 @@ public class Node {
 
     public int getValue() {
         return value;
+    }
+    
+    public String getValueString() {
+        return "" + value;
     }
 
     public void setValue(int value) {
@@ -56,6 +74,10 @@ public class Node {
     public Color getColor() {
         return color;
     }
+    
+    public String getColorName() {
+        return this.color==Color.red ? "r" : this.color==Color.green ? "g" : "b";
+    }
 
     public void setColor(Color color) {
         this.color = color;
@@ -67,6 +89,10 @@ public class Node {
 
     public boolean isInitial() {
         return initial;
+    }
+    
+    public String getInitial() {
+        return "" + initial;
     }
     
     public void setInitial(boolean val) {
@@ -140,10 +166,9 @@ public class Node {
     
     @Override
     public String toString() {
-        String col = this.color==Color.red ? "r" : this.color==Color.green ? "g" : "b";
         String c = columnConstraint != null ? columnConstraint : " ";
         String val = value != 0 ? "" + value : " ";
-        return "" + val + " " + col + " " + c;
+        return "" + val + " " + getColorName() + " " + c;
     }
     
 }

@@ -14,8 +14,12 @@ public class Game {
     public Game(){}
     
     public Node [][] getGame(int N){
+        Node [][] nodes = DataBase.getGame(N);
+        if(nodes == null){
+            nodes = Default.getGame(N);
+        }
         
-        return null;
+        return nodes;
     }
     
     public Node [][] gameInit(int N){
@@ -25,7 +29,7 @@ public class Game {
     
     public boolean checkGame(Node [][] nodes){
         boolean valid = true;
-
+        if(nodes == null) return true;
         for(int i = 0; i < nodes.length; i++){
             for(int j = 0;  j < nodes.length; j++){
                 if(nodes[i][j].isInitial()) nodes[i][j].setColor(Color.black);
@@ -69,6 +73,7 @@ public class Game {
     }
     
     public void print(Node [][] nodes){
+        if(nodes == null) return;
         System.out.println("----------------------------------------");
         for(int i = 0; i < nodes.length; i++){
             for(int j = 0; j < nodes.length; j++){

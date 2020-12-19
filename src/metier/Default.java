@@ -180,6 +180,8 @@ public class Default {
                 nodes[6][3].setColumnConstraint("<");
                 nodes[8][1].setColumnConstraint("<");
                 break;
+            default: 
+                return null;
         }
         
         return nodes;

@@ -18,10 +18,9 @@ public class Futoshiki {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("hello world");
         Game game = new Game();
-        int N = 4;
-        Node [][] nodes = game.gameInit(N);
+        int N = 7;
+        Node [][] nodes = game.getGame(N);
         
         game.print(nodes);
         if (Backtracking.solve(nodes, 0, 0)){
@@ -30,7 +29,7 @@ public class Futoshiki {
         }
         else
             System.out.println("No Solution exists");
-        nodes = DataBase.getGame(N);
+        
     }
     
 }

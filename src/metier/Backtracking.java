@@ -15,6 +15,8 @@ public class Backtracking {
     static int a = 1;
     
     public static boolean solve(Node [][] nodes, int row, int col){
+        if(nodes == null) return false;
+        
         if (row == nodes.length - 1 && col == nodes.length)
             return true;
  
