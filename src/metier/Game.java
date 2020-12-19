@@ -15,6 +15,11 @@ public class Game {
     
     public Node [][] getGame(int N){
         Node [][] nodes = DataBase.getGame(N);
+        
+        if(nodes == null){
+            nodes = random(N);
+        }
+        
         if(nodes == null){
             nodes = Default.getGame(N);
         }
@@ -22,9 +27,27 @@ public class Game {
         return nodes;
     }
     
-    public Node [][] gameInit(int N){
+    public Node [][] random(int N){
+        Node [][] nodes = new Node[N][N];
+        for(int i = 0; i  < nodes.length ; i++){
+            for(int j = 0; j < nodes.length; j++){
+                nodes[i][j] = new Node();
+            }
+        }
         
-        return Default.getGame(N);
+        /*
+            generate here random constraint
+        */
+        
+        
+        if(Backtracking.solve(nodes, 0, 0)){
+            return nodes;
+        }
+        return null;
+    }
+    
+    public void saveGame(Node [][] nodes){
+        DataBase.saveGame(nodes);
     }
     
     public boolean checkGame(Node [][] nodes){
