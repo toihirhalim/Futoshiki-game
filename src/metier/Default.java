@@ -125,6 +125,14 @@ public class Default {
                 nodes[7][2].setColumnConstraint(">");
                 break;
             case 9: 
+                /*
+                nodes[0][5].setDefaultValue(8);
+                nodes[1][7].setDefaultValue(6);
+                nodes[2][0].setDefaultValue(9);
+                nodes[3][1].setDefaultValue(5);
+                nodes[3][5].setDefaultValue(6);
+                nodes[5][3].setDefaultValue(8);
+                */
                 nodes[3][8].setDefaultValue(7);
                 nodes[4][8].setDefaultValue(5);
                 nodes[5][1].setDefaultValue(3);
@@ -144,7 +152,7 @@ public class Default {
                 nodes[7][6].setRowConstraint(">");
                 nodes[0][0].setRowConstraint("<");
                 nodes[0][7].setRowConstraint("<");
-                nodes[3][3].setRowConstraint("<");
+                nodes[3][1].setRowConstraint("<");
                 nodes[5][8].setRowConstraint("<");
                 nodes[6][0].setRowConstraint("<");
                 nodes[6][5].setRowConstraint("<");

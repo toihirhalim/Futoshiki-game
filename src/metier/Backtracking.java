@@ -15,7 +15,6 @@ public class Backtracking {
     static int a = 1;
     
     public static boolean solve(Node [][] nodes, int row, int col){
-        System.out.println("still goin n: " + a++);
         if (row == nodes.length - 1 && col == nodes.length)
             return true;
  

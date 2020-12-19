@@ -20,7 +20,7 @@ public class Futoshiki {
         // TODO code application logic here
         System.out.println("hello world");
         Game game = new Game();
-        int N = 9;
+        int N = 4;
         Node [][] nodes = game.gameInit(N);
         
         game.print(nodes);
@@ -30,6 +30,7 @@ public class Futoshiki {
         }
         else
             System.out.println("No Solution exists");
+        nodes = DataBase.getGame(N);
     }
     
 }
