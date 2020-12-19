@@ -20,7 +20,7 @@ public class Futoshiki {
         // TODO code application logic here
         System.out.println("hello world");
         Game game = new Game();
-        int N = 4;
+        int N = 9;
         Node [][] nodes = game.gameInit(N);
         
         game.print(nodes);

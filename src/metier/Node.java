@@ -46,6 +46,12 @@ public class Node {
     public void setValue(int value) {
         this.value = value;
     }
+    
+    public void setDefaultValue(int value){
+        this.value = value;
+        this.initial = true;
+        this.color = Color.black;
+    }
 
     public Color getColor() {
         return color;
