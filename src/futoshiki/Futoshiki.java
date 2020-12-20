@@ -7,8 +7,8 @@ package futoshiki;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import javax.swing.JButton;
 import javax.swing.JPanel;
+import java.util.Random;
 import metier.*;
 
 /**
@@ -23,16 +23,18 @@ public class Futoshiki extends javax.swing.JFrame {
     Game game = new Game();
     Node [][] nodes;
     int N;
+    int sizeBoard;
     
     
     public Futoshiki() {
         initComponents();
         gamePanel = new JPanel();
-        jPanel2.add(gamePanel);
-        gamePanel.setBounds(0, 0, 400, 400);
-        gamePanel.setBackground(Color.white);
         nodes = game.getLastGame();
         N = nodes.length;
+        sizeBoard = N * 70;
+        jPanel2.add(gamePanel);
+        gamePanel.setBounds(20, 20, sizeBoard, sizeBoard);
+        gamePanel.setBackground(Color.white);
         print();
     }
 
@@ -81,13 +83,13 @@ public class Futoshiki extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(125, 125, 125)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
+                .addGap(123, 123, 123)
                 .addComponent(jButton2)
-                .addGap(73, 73, 73)
+                .addGap(106, 106, 106)
                 .addComponent(jButton1)
-                .addGap(80, 80, 80))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,11 +108,11 @@ public class Futoshiki extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 648, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,18 +120,15 @@ public class Futoshiki extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,20 +152,29 @@ public class Futoshiki extends javax.swing.JFrame {
         
         if(N != select){
             N = select;
+            sizeBoard = N * 70;
             nodes = game.getGame(N);
             print();
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void print(){
+        Random rd = new Random();
         gamePanel.removeAll();
         gamePanel.revalidate();
         gamePanel.repaint();
+        
+        //Dimension[width=659,height=648]
+        int line = (650 - sizeBoard) /2 + 20;
+        gamePanel.setBounds(line, line, sizeBoard, sizeBoard);
         if(nodes != null){
             for(int i = 0 ; i < nodes.length; i++){
                 for(int j = 0; j < nodes.length; j++){
-                    JButton b1=new JButton(""+ nodes[i][j].getValue());
-                    gamePanel.add(b1);
+                    //JButton b1=new JButton(""+ nodes[i][j].getValue());
+                    JPanel nodePanel = new JPanel();
+                    nodePanel.setBackground(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+                    
+                    gamePanel.add(nodePanel);
                 }
             }
             gamePanel.setLayout(new GridLayout(N,N));
