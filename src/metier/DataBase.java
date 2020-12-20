@@ -96,8 +96,9 @@ public class DataBase {
 
         while (i.hasNext()) {
             Element courant = (Element) i.next();
+            if(id != null && id.equals("0")) return courant;
             String att = courant.getAttributeValue("id");
-            if (id.equals(att)) {
+            if (id != null && id.equals(att)) {
                 return courant;
             }
         }
@@ -146,6 +147,16 @@ public class DataBase {
         initialize();
         String Id = "" + N;
         Element game = getGame(Id);
+        
+        if(game != null){
+            return toGame(game);
+        }
+        return null;
+    }
+    
+    public static Node [][] getLastGame(){
+        initialize();
+        Element game = getGame("0");
         
         if(game != null){
             return toGame(game);
