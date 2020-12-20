@@ -5,6 +5,10 @@
  */
 package futoshiki;
 
+import java.awt.Color;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import metier.*;
 
 /**
@@ -16,14 +20,20 @@ public class Futoshiki extends javax.swing.JFrame {
     /**
      * Creates new form Futoshiki
      */
-    
-    Node nodes;
+    Game game = new Game();
+    Node [][] nodes;
     int N;
     
-    Node node = new Node("2", "g", ">", "<" , "false");
     
     public Futoshiki() {
         initComponents();
+        gamePanel = new JPanel();
+        jPanel2.add(gamePanel);
+        gamePanel.setBounds(0, 0, 400, 400);
+        gamePanel.setBackground(Color.white);
+        nodes = game.getLastGame();
+        N = nodes.length;
+        print();
     }
 
     /**
@@ -38,6 +48,7 @@ public class Futoshiki extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,12 +69,21 @@ public class Futoshiki extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4", "5", "6", "7", "8", "9" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
                 .addComponent(jButton2)
                 .addGap(73, 73, 73)
                 .addComponent(jButton1)
@@ -75,7 +95,8 @@ public class Futoshiki extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -116,12 +137,41 @@ public class Futoshiki extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //generate new game
+        nodes = game.random(N);
+        print();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // generate Solution
+        game.solve(nodes);
+        print();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        int select = jComboBox1.getSelectedIndex() + 4;
+        
+        if(N != select){
+            N = select;
+            nodes = game.getGame(N);
+            print();
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void print(){
+        gamePanel.removeAll();
+        gamePanel.revalidate();
+        gamePanel.repaint();
+        if(nodes != null){
+            for(int i = 0 ; i < nodes.length; i++){
+                for(int j = 0; j < nodes.length; j++){
+                    JButton b1=new JButton(""+ nodes[i][j].getValue());
+                    gamePanel.add(b1);
+                }
+            }
+            gamePanel.setLayout(new GridLayout(N,N));
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -157,9 +207,11 @@ public class Futoshiki extends javax.swing.JFrame {
         });
     }
 
+    private javax.swing.JPanel gamePanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
