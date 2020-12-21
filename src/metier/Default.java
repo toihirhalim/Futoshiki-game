@@ -5,7 +5,6 @@
  */
 package metier;
 
-import java.awt.Color;
 
 /**
  *
