@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import java.util.Random;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 import metier.*;
 
 /**
@@ -163,7 +165,7 @@ public class Futoshiki extends javax.swing.JFrame {
         gamePanel.removeAll();
         gamePanel.revalidate();
         gamePanel.repaint();
-        
+        Border blackline = BorderFactory.createLineBorder(Color.black);
         //Dimension[width=659,height=648]
         int line = (650 - sizeBoard) /2 + 20;
         gamePanel.setBounds(line, line, sizeBoard, sizeBoard);
@@ -172,6 +174,24 @@ public class Futoshiki extends javax.swing.JFrame {
                 for(int j = 0; j < nodes.length; j++){
                     //JButton b1=new JButton(""+ nodes[i][j].getValue());
                     JPanel nodePanel = new JPanel();
+                    nodePanel.setLayout(null);
+                    
+                    JPanel textFieldPanel = new JPanel();
+                    JPanel columnConstraintPanel = new JPanel();
+                    JPanel rowConstraintPanel = new JPanel();
+                    
+                    textFieldPanel.setBackground(Color.white);
+                    textFieldPanel.setBorder(blackline);
+                    textFieldPanel.setBounds(0, 0, 40, 40);
+                    columnConstraintPanel.setBounds(40, 0, 30, 40);
+                    rowConstraintPanel.setBounds(0, 40, 40, 30);
+                    columnConstraintPanel.setBackground(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+                    rowConstraintPanel.setBackground(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+                    
+                    
+                    nodePanel.add(textFieldPanel);
+                    nodePanel.add(columnConstraintPanel);
+                    nodePanel.add(rowConstraintPanel);
                     nodePanel.setBackground(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
                     
                     gamePanel.add(nodePanel);
