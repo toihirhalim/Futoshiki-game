@@ -16,6 +16,9 @@ import javax.swing.text.MaskFormatter;
 import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import metier.*;
 
 /**
@@ -150,6 +153,7 @@ public class Futoshiki extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // generate Solution
         game.solve(nodes);
+        game.checkGame(nodes);
         print();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -164,9 +168,18 @@ public class Futoshiki extends javax.swing.JFrame {
             print();
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
-    public void warn(int i, int j){
-                                    System.out.println(i + " " + j);
-                                }
+    
+    private void changeValue(int i, int j, int value){
+        
+        if(value >= 0 && value <= N){
+            if(value != nodes[i][j].getValue()){
+                nodes[i][j].setValue(value);
+                game.checkGame(nodes);
+                print();
+            }
+        }
+    }
+    
     private void print(){
         Random rd = new Random();
         gamePanel.removeAll();
@@ -176,9 +189,9 @@ public class Futoshiki extends javax.swing.JFrame {
         Border blackline = BorderFactory.createLineBorder(Color.black);
         MaskFormatter formatter = null;
         try{
-            String allowedNumbers = "";
+            String allowedNumbers = " ";
             for(int i = 1; i <= N; i++) allowedNumbers += "" + i;
-            formatter = new MaskFormatter("#");
+            formatter = new MaskFormatter("*");
             formatter.setValidCharacters(allowedNumbers);
         }catch(Exception e){}
         
@@ -229,15 +242,48 @@ public class Futoshiki extends javax.swing.JFrame {
                         if(nodes[i][j].getColor() == Color.black){
                             valeur.setEditable(false);
                         }else {
-                            valeur.addActionListener(new java.awt.event.ActionListener() {
+                            /*valeur.addActionListener(new java.awt.event.ActionListener() {
                                 int i = x;
                                 int j = y;
-                                
-                                public void actionPerformed(java.awt.event.ActionEvent e) {
-                                        warn(i, j);
+                                public int val(){
+                                    try{
+                                        return Integer.parseInt(valeur.getText());
+                                    }catch(Exception e){
+                                        return 0;
+                                    }
                                 }
                                 
-                            });
+                                public void actionPerformed(java.awt.event.ActionEvent e) {
+                                    changeValue(i, j, val());
+                                }
+                                
+                            });*/
+                            
+                            valeur.getDocument().addDocumentListener(new DocumentListener() {
+                                int i = x;
+                                int j = y;
+                                public void changedUpdate(DocumentEvent e) {
+                                  warn();
+                                }
+                                public void removeUpdate(DocumentEvent e) {
+                                  warn();
+                                }
+                                public void insertUpdate(DocumentEvent e) {
+                                  warn();
+                                }
+
+                                public void warn() {
+                                  changeValue(i, j, val());
+                                }
+                                public int val(){
+                                    if(" ".equals(valeur.getText())) return 0;
+                                    try{
+                                        return Integer.parseInt(valeur.getText());
+                                    }catch(Exception e){
+                                        return -1;
+                                    }
+                                }
+                              });
                             
                            
                         }

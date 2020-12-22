@@ -5,7 +5,6 @@
  */
 package metier;
 
-import java.awt.Color;
 
 /**
  *
@@ -25,7 +24,7 @@ public class Backtracking {
             col = 0;
         }
  
-        if (nodes[row][col].getValue() != 0)
+        if (nodes[row][col].isInitial())
             return solve(nodes, row, col + 1);
  
         for (int num = 1; num <= nodes.length ; num++) {

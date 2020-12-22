@@ -19,7 +19,6 @@ public class Game {
         if(nodes == null){
             nodes = Default.getGame(N);
         }
-        
         return nodes;
     }
     
@@ -29,7 +28,6 @@ public class Game {
         if(nodes == null){
             nodes = Default.getGame(4);
         }
-        
         return nodes;
     }
     public Node [][] random(int N){
