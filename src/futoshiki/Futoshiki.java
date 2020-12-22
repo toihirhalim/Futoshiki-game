@@ -166,6 +166,7 @@ public class Futoshiki extends javax.swing.JFrame {
             sizeBoard = N * 70;
             nodes = game.getGame(N);
             print();
+            //game.saveGame(nodes);
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
     
@@ -174,8 +175,8 @@ public class Futoshiki extends javax.swing.JFrame {
         if(value >= 0 && value <= N){
             if(value != nodes[i][j].getValue()){
                 nodes[i][j].setValue(value);
-                game.checkGame(nodes);
                 print();
+                game.saveGame(nodes);
             }
         }
     }
@@ -198,6 +199,7 @@ public class Futoshiki extends javax.swing.JFrame {
         int line = (650 - sizeBoard) /2 + 20;
         gamePanel.setBounds(line, line, sizeBoard, sizeBoard);
         if(nodes != null){
+            game.checkGame(nodes);
             for(int i = 0 ; i < nodes.length; i++){
                 for(int j = 0; j < nodes.length; j++){
                     JPanel nodePanel = new JPanel();
@@ -239,7 +241,7 @@ public class Futoshiki extends javax.swing.JFrame {
                         valeur.setBorder(null);
                         
                         valeur.setForeground(nodes[i][j].getColor());
-                        if(nodes[i][j].getColor() == Color.black){
+                        if(nodes[i][j].isInitial()){
                             valeur.setEditable(false);
                         }else {
                             /*valeur.addActionListener(new java.awt.event.ActionListener() {
@@ -332,6 +334,7 @@ public class Futoshiki extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        DataBase.initialize();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -339,7 +342,7 @@ public class Futoshiki extends javax.swing.JFrame {
             }
         });
     }
-
+    
     private javax.swing.JPanel gamePanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

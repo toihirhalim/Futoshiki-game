@@ -27,7 +27,7 @@ public class DataBase {
     static String fichier = "games.xml";
     static String game = "game";
     
-    static void initialize() {
+    public static void initialize() {
         try {
             lireFichier();
         }catch(Exception e) {

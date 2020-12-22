@@ -1,4 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <games>
-  
+  <game id="4">
+    <node x="0" y="0">
+      <value>3</value>
+      <color>r</color>
+      <rowConstraint>&gt;</rowConstraint>
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+    <node x="0" y="1">
+      <value>0</value>
+      <color>g</color>
+      <rowConstraint />
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+    <node x="0" y="2">
+      <value>0</value>
+      <color>g</color>
+      <rowConstraint />
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+    <node x="0" y="3">
+      <value>3</value>
+      <color>r</color>
+      <rowConstraint />
+      <columnConstraint />
+      <initial>true</initial>
+    </node>
+    <node x="1" y="0">
+      <value>4</value>
+      <color>r</color>
+      <rowConstraint />
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+    <node x="1" y="1">
+      <value>1</value>
+      <color>r</color>
+      <rowConstraint>&gt;</rowConstraint>
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+    <node x="1" y="2">
+      <value>0</value>
+      <color>g</color>
+      <rowConstraint />
+      <columnConstraint>&lt;</columnConstraint>
+      <initial>false</initial>
+    </node>
+    <node x="1" y="3">
+      <value>0</value>
+      <color>g</color>
+      <rowConstraint />
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+    <node x="2" y="0">
+      <value>0</value>
+      <color>g</color>
+      <rowConstraint />
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+    <node x="2" y="1">
+      <value>4</value>
+      <color>r</color>
+      <rowConstraint>&gt;</rowConstraint>
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+    <node x="2" y="2">
+      <value>3</value>
+      <color>b</color>
+      <rowConstraint />
+      <columnConstraint />
+      <initial>true</initial>
+    </node>
+    <node x="2" y="3">
+      <value>0</value>
+      <color>g</color>
+      <rowConstraint />
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+    <node x="3" y="0">
+      <value>0</value>
+      <color>g</color>
+      <rowConstraint />
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+    <node x="3" y="1">
+      <value>0</value>
+      <color>g</color>
+      <rowConstraint />
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+    <node x="3" y="2">
+      <value>0</value>
+      <color>g</color>
+      <rowConstraint />
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+    <node x="3" y="3">
+      <value>0</value>
+      <color>g</color>
+      <rowConstraint />
+      <columnConstraint />
+      <initial>false</initial>
+    </node>
+  </game>
 </games>
