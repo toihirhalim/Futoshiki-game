@@ -7,7 +7,9 @@ package futoshiki;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import javax.swing.JPanel;;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
@@ -168,6 +170,7 @@ public class Futoshiki extends javax.swing.JFrame {
         gamePanel.removeAll();
         gamePanel.revalidate();
         gamePanel.repaint();
+        Font f = new Font("Verdana",Font.BOLD,30);
         Border blackline = BorderFactory.createLineBorder(Color.black);
         MaskFormatter formatter = null;
         try{
@@ -176,13 +179,12 @@ public class Futoshiki extends javax.swing.JFrame {
             formatter = new MaskFormatter("#");
             formatter.setValidCharacters(allowedNumbers);
         }catch(Exception e){}
-        //Dimension[width=659,height=648]
+        
         int line = (650 - sizeBoard) /2 + 20;
         gamePanel.setBounds(line, line, sizeBoard, sizeBoard);
         if(nodes != null){
             for(int i = 0 ; i < nodes.length; i++){
                 for(int j = 0; j < nodes.length; j++){
-                    //JButton b1=new JButton(""+ nodes[i][j].getValue());
                     JPanel nodePanel = new JPanel();
                     nodePanel.setLayout(null);
                     
@@ -195,18 +197,30 @@ public class Futoshiki extends javax.swing.JFrame {
                     textFieldPanel.setBounds(0, 0, 40, 40);
                     textFieldPanel.setLayout(null);
                     
+                    JLabel rowConstraintLabel = new JLabel(nodes[i][j].getRowConstraint());
+                    JLabel columnConstraintLabel = new JLabel(nodes[i][j].getColumnConstraint());
+                    rowConstraintLabel.setFont(f);
+                    columnConstraintLabel.setFont(f);
+                    rowConstraintLabel.setBounds(8,0, 40, 30);
+                    columnConstraintLabel.setBounds(0,0, 30, 40);
                     
                     columnConstraintPanel.setBounds(40, 0, 30, 40);
                     rowConstraintPanel.setBounds(0, 40, 40, 30);
                     columnConstraintPanel.setBackground(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
                     rowConstraintPanel.setBackground(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+                    columnConstraintPanel.setLayout(null);
+                    rowConstraintPanel.setLayout(null);
+                    rowConstraintPanel.add(rowConstraintLabel);
+                    columnConstraintPanel.add(columnConstraintLabel);
                     
-                    //JTextField valeur = new JTextField(2);
                     try{
                         JFormattedTextField  valeur = new JFormattedTextField(formatter);
                         valeur.setBounds(0, 0, 40, 40);
                         
                         valeur.setText("" + nodes[i][j].getValue());
+                        valeur.setFont(f);
+                        
+                        valeur.setForeground(nodes[i][j].getColor());
                         if(nodes[i][j].getColor() == Color.black){
                             valeur.setEditable(false);
                         }
