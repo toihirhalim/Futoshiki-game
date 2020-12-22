@@ -7,7 +7,10 @@ package futoshiki;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import javax.swing.JPanel;
+import javax.swing.JPanel;;
+import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
 import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
@@ -166,6 +169,13 @@ public class Futoshiki extends javax.swing.JFrame {
         gamePanel.revalidate();
         gamePanel.repaint();
         Border blackline = BorderFactory.createLineBorder(Color.black);
+        MaskFormatter formatter = null;
+        try{
+            String allowedNumbers = "";
+            for(int i = 1; i <= N; i++) allowedNumbers += "" + i;
+            formatter = new MaskFormatter("#");
+            formatter.setValidCharacters(allowedNumbers);
+        }catch(Exception e){}
         //Dimension[width=659,height=648]
         int line = (650 - sizeBoard) /2 + 20;
         gamePanel.setBounds(line, line, sizeBoard, sizeBoard);
@@ -183,16 +193,33 @@ public class Futoshiki extends javax.swing.JFrame {
                     textFieldPanel.setBackground(Color.white);
                     textFieldPanel.setBorder(blackline);
                     textFieldPanel.setBounds(0, 0, 40, 40);
+                    textFieldPanel.setLayout(null);
+                    
+                    
                     columnConstraintPanel.setBounds(40, 0, 30, 40);
                     rowConstraintPanel.setBounds(0, 40, 40, 30);
                     columnConstraintPanel.setBackground(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
                     rowConstraintPanel.setBackground(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
                     
+                    //JTextField valeur = new JTextField(2);
+                    try{
+                        JFormattedTextField  valeur = new JFormattedTextField(formatter);
+                        valeur.setBounds(0, 0, 40, 40);
+                        
+                        valeur.setText("" + nodes[i][j].getValue());
+                        if(nodes[i][j].getColor() == Color.black){
+                            valeur.setEditable(false);
+                        }
+                        textFieldPanel.add(valeur);
+                    }catch(Exception e){
+                        JTextField valeur = new JTextField(2);
+                        textFieldPanel.add(valeur);
+                    }
                     
                     nodePanel.add(textFieldPanel);
                     nodePanel.add(columnConstraintPanel);
                     nodePanel.add(rowConstraintPanel);
-                    nodePanel.setBackground(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+                    nodePanel.setBackground(Color.white);
                     
                     gamePanel.add(nodePanel);
                 }
