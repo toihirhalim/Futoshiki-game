@@ -164,7 +164,9 @@ public class Futoshiki extends javax.swing.JFrame {
             print();
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
+    public void warn(int i, int j){
+                                    System.out.println(i + " " + j);
+                                }
     private void print(){
         Random rd = new Random();
         gamePanel.removeAll();
@@ -206,24 +208,40 @@ public class Futoshiki extends javax.swing.JFrame {
                     
                     columnConstraintPanel.setBounds(40, 0, 30, 40);
                     rowConstraintPanel.setBounds(0, 40, 40, 30);
-                    columnConstraintPanel.setBackground(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
-                    rowConstraintPanel.setBackground(new Color(rd.nextInt(255), rd.nextInt(255), rd.nextInt(255)));
+                    columnConstraintPanel.setBackground(Color.white);
+                    rowConstraintPanel.setBackground(Color.white);
                     columnConstraintPanel.setLayout(null);
                     rowConstraintPanel.setLayout(null);
                     rowConstraintPanel.add(rowConstraintLabel);
                     columnConstraintPanel.add(columnConstraintLabel);
                     
                     try{
+                        final int x = i;
+                        final int y = j;
                         JFormattedTextField  valeur = new JFormattedTextField(formatter);
                         valeur.setBounds(0, 0, 40, 40);
                         
                         valeur.setText("" + nodes[i][j].getValue());
                         valeur.setFont(f);
+                        valeur.setBorder(null);
                         
                         valeur.setForeground(nodes[i][j].getColor());
                         if(nodes[i][j].getColor() == Color.black){
                             valeur.setEditable(false);
+                        }else {
+                            valeur.addActionListener(new java.awt.event.ActionListener() {
+                                int i = x;
+                                int j = y;
+                                
+                                public void actionPerformed(java.awt.event.ActionEvent e) {
+                                        warn(i, j);
+                                }
+                                
+                            });
+                            
+                           
                         }
+                             
                         textFieldPanel.add(valeur);
                     }catch(Exception e){
                         JTextField valeur = new JTextField(2);
