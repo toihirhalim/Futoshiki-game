@@ -97,7 +97,6 @@ public class DataBase {
         Element courant = null;
         while (i.hasNext()) {
             courant = (Element) i.next();
-            if(id != null && id.equals("0")) return courant;
             String att = courant.getAttributeValue("id");
             if (id != null && id.equals(att)) {
                 return courant;
