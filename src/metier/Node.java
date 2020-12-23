@@ -35,7 +35,7 @@ public class Node {
         this.color = color != null ? color.equals("r") ? Color.red : color.equals("g") ? Color.green : Color.black : Color.black;
         this.rowConstraint = rowConstraint;
         this.columnConstraint = columnConstraint;
-        this.initial = initial != null ? initial.equals("true") ? true : false : false;
+        this.initial = initial != null ? initial.equals("true"): false;
     }
     
     public Node(int value, String rowConstraint, String columnConstraint) {

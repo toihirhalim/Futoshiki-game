@@ -166,7 +166,6 @@ public class Futoshiki extends javax.swing.JFrame {
             sizeBoard = N * 70;
             nodes = game.getGame(N);
             print();
-            //game.saveGame(nodes);
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
     
@@ -176,7 +175,7 @@ public class Futoshiki extends javax.swing.JFrame {
             if(value != nodes[i][j].getValue()){
                 nodes[i][j].setValue(value);
                 print();
-                game.saveGame(nodes);
+                //game.saveGame(nodes);
             }
         }
     }
@@ -343,7 +342,7 @@ public class Futoshiki extends javax.swing.JFrame {
         });
     }
     
-    private javax.swing.JPanel gamePanel;
+    private JPanel gamePanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

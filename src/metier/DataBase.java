@@ -93,16 +93,17 @@ public class DataBase {
     static Element getGame(String id) {
         List<Element> games = racine.getChildren(game);
         Iterator<Element> i = games.iterator();
-
+        
+        Element courant = null;
         while (i.hasNext()) {
-            Element courant = (Element) i.next();
+            courant = (Element) i.next();
             if(id != null && id.equals("0")) return courant;
             String att = courant.getAttributeValue("id");
             if (id != null && id.equals(att)) {
                 return courant;
             }
         }
-        return null;
+        return courant;
     }
     static Node [][] toGame(Element game) {
         try{
