@@ -41,8 +41,8 @@ public class Futoshiki extends javax.swing.JFrame {
         gamePanel = new JPanel();
         nodes = game.getLastGame();
         N = nodes.length;
+        jComboBox1.setSelectedIndex(N - 4);
         sizeBoard = N * 70;
-        jComboBox1.
         jPanel2.add(gamePanel);
         gamePanel.setBounds(20, 20, sizeBoard, sizeBoard);
         gamePanel.setBackground(Color.white);
@@ -167,6 +167,7 @@ public class Futoshiki extends javax.swing.JFrame {
             sizeBoard = N * 70;
             nodes = game.getGame(N);
             print();
+            game.saveGame(nodes);
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
     

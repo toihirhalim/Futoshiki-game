@@ -94,15 +94,18 @@ public class DataBase {
         List<Element> games = racine.getChildren(game);
         Iterator<Element> i = games.iterator();
         
-        Element courant = null;
+        Element last = null;
         while (i.hasNext()) {
-            courant = (Element) i.next();
+            Element courant = (Element) i.next();
+            if (id != null && id.equals("0")){
+                last = courant;
+            }
             String att = courant.getAttributeValue("id");
             if (id != null && id.equals(att)) {
                 return courant;
             }
         }
-        return courant;
+        return last;
     }
     static Node [][] toGame(Element game) {
         try{
