@@ -67,18 +67,15 @@ public class DataBase {
                     node.setAttribute(x);
                     node.setAttribute(y);
                     Element value = new Element("value");
-                    Element color = new Element("color");
                     Element rowConstraint = new Element("rowConstraint");
                     Element columnConstraint = new Element("columnConstraint");
                     Element initial = new Element("initial");
                     value.setText(nodes[i][j].getValueString());
-                    color.setText(nodes[i][j].getColorName());
                     rowConstraint.setText(nodes[i][j].getRowConstraint());
                     columnConstraint.setText(nodes[i][j].getColumnConstraint());
                     columnConstraint.setText(nodes[i][j].getColumnConstraint());
                     initial.setText(nodes[i][j].getInitial());
                     node.addContent(value);
-                    node.addContent(color);
                     node.addContent(rowConstraint);
                     node.addContent(columnConstraint);
                     node.addContent(initial);
@@ -121,7 +118,6 @@ public class DataBase {
                 String x = courant.getAttributeValue("x");
                 String y = courant.getAttributeValue("y");
                 String value = courant.getChild("value").getText();
-                String color = courant.getChild("color").getText();
                 String rowConstraint = courant.getChild("rowConstraint").getText();
                 String columnConstraint = courant.getChild("columnConstraint").getText();
                 String initial = courant.getChild("initial").getText();
@@ -129,7 +125,7 @@ public class DataBase {
                 int row = Integer.parseInt(x);
                 int col = Integer.parseInt(y);
 
-                nodes[row][col] = new Node(value, color, rowConstraint, columnConstraint, initial);
+                nodes[row][col] = new Node(value, rowConstraint, columnConstraint, initial);
             }
             return nodes;
         }catch(Exception e){

@@ -25,7 +25,7 @@ public class Node {
     private boolean initial = false;
 
     public Node() { }   
-    public Node(String value, String color, String rowConstraint, String columnConstraint, String initial) {
+    public Node(String value, String rowConstraint, String columnConstraint, String initial) {
         int val;
         try{
             val = Integer.parseInt(value);
@@ -33,10 +33,10 @@ public class Node {
             val = 0;
         }
         this.value = val;
-        this.color = color != null ? color.equals("r") ? Color.red : color.equals("g") ? Color.green : Color.black : Color.black;
         this.rowConstraint = rowConstraint;
         this.columnConstraint = columnConstraint;
         this.initial = initial != null ? initial.equals("true"): false;
+        this.color = this.initial ? Color.black : Color.green;
     }   
     public Node(int value, String rowConstraint, String columnConstraint) {
         this.value = value;

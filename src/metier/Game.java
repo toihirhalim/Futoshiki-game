@@ -11,6 +11,9 @@ import java.awt.Color;
  * @author Toihir
  */
 public class Game {
+    
+    Node [][] nodes;
+    
     public Game(){}
     
     public Node [][] getGame(int N){
@@ -100,7 +103,6 @@ public class Game {
                 }
             }
         }
-        System.out.println("check completed");
         return valid;
     }
     
