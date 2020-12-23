@@ -51,15 +51,21 @@ public class Game {
         }
         return null;*/
     }
-    
+    public void getInitialGame(Node [][] nodes){
+        for(int i = 0; i  < nodes.length ; i++){
+            for(int j = 0; j < nodes.length; j++){
+                if(!nodes[i][j].isInitial()){
+                    nodes[i][j].setValue(0);
+                }
+            }
+        }
+    }
     public void saveGame(Node [][] nodes){
         DataBase.saveGame(nodes);
     }
-    
     public boolean solve(Node [][] nodes){
         return Backtracking.solve(nodes, 0, 0);
     }
-    
     public boolean checkGame(Node [][] nodes){
         boolean valid = true;
         if(nodes == null) return true;
@@ -104,8 +110,7 @@ public class Game {
             }
         }
         return valid;
-    }
-    
+    } 
     public void print(Node [][] nodes){
         if(nodes == null) return;
         System.out.println("----------------------------------------");
