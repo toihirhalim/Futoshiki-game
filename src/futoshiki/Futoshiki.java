@@ -215,21 +215,27 @@ public class Futoshiki extends javax.swing.JFrame {
                     textFieldPanel.setBounds(0, 0, 40, 40);
                     textFieldPanel.setLayout(null);
                     
-                    JLabel rowConstraintLabel = new JLabel(nodes[i][j].getRowConstraint());
-                    JLabel columnConstraintLabel = new JLabel(nodes[i][j].getColumnConstraint());
-                    rowConstraintLabel.setFont(f);
-                    columnConstraintLabel.setFont(f);
-                    rowConstraintLabel.setBounds(8,0, 40, 30);
-                    columnConstraintLabel.setBounds(0,0, 30, 40);
-                    
                     columnConstraintPanel.setBounds(40, 0, 30, 40);
                     rowConstraintPanel.setBounds(0, 40, 40, 30);
                     columnConstraintPanel.setBackground(Color.white);
                     rowConstraintPanel.setBackground(Color.white);
                     columnConstraintPanel.setLayout(null);
                     rowConstraintPanel.setLayout(null);
-                    rowConstraintPanel.add(rowConstraintLabel);
-                    columnConstraintPanel.add(columnConstraintLabel);
+                    
+                    if(nodes[i][j].hasColumnConstraint()){
+                        JLabel columnConstraintLabel = new JLabel(nodes[i][j].getColumnConstraint());
+                        columnConstraintLabel.setFont(f);
+                        columnConstraintLabel.setBounds(0,0, 30, 40);
+                        columnConstraintLabel.setForeground(nodes[i][j].getColumnConstraintColor());
+                        columnConstraintPanel.add(columnConstraintLabel);
+                    }
+                    if(nodes[i][j].hasRowConstraint()){
+                        JLabel rowConstraintLabel = new JLabel(nodes[i][j].getRowConstraint());
+                        rowConstraintLabel.setFont(f);
+                        rowConstraintLabel.setBounds(8,0, 40, 30);
+                        rowConstraintLabel.setForeground(nodes[i][j].getRowConstraintColor());
+                        rowConstraintPanel.add(rowConstraintLabel);
+                    }
                     
                     try{
                         final int x = i;

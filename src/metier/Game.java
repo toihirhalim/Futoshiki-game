@@ -64,6 +64,9 @@ public class Game {
             for(int j = 0;  j < nodes.length; j++){
                 if(nodes[i][j].isInitial()) nodes[i][j].setColor(Color.black);
                 else nodes[i][j].setColor(Color.green);
+                
+                nodes[i][j].setColumnConstraintColor(Color.black);
+                nodes[i][j].setRowConstraintColor(Color.black);
             }
         }
         
@@ -72,33 +75,32 @@ public class Game {
                 int val = nodes[i][j].getValue();
                 if(val < 1 || val > nodes.length){
                     valid = false;
-                    break;
-                }
-                for(int k = j + 1; k < nodes.length; k++){
-                    if(nodes[i][j].getValue() == nodes[i][k].getValue()){
-                        nodes[i][j].setColor(Color.red);
-                        nodes[i][k].setColor(Color.red);
-                        valid = false;
+                }else{
+                    for(int k = j + 1; k < nodes.length; k++){
+                        if(nodes[i][j].getValue() == nodes[i][k].getValue()){
+                            nodes[i][j].setColor(Color.red);
+                            nodes[i][k].setColor(Color.red);
+                            valid = false;
+                        }
                     }
-                }
-                for(int k = i + 1; k < nodes.length; k++){
-                    if(nodes[i][j].getValue() == nodes[k][j].getValue()){
-                        nodes[i][j].setColor(Color.red);
-                        nodes[k][j].setColor(Color.red);
-                        valid = false;
+                    for(int k = i + 1; k < nodes.length; k++){
+                        if(nodes[i][j].getValue() == nodes[k][j].getValue()){
+                            nodes[i][j].setColor(Color.red);
+                            nodes[k][j].setColor(Color.red);
+                            valid = false;
+                        }
                     }
-                }
-                
-                if(i < nodes.length - 1 && nodes[i][j].hasRowConstraint() && !nodes[i][j].checkNextRowValue(nodes[i+1][j].getValue())){
-                    nodes[i][j].setColor(Color.red);
-                    nodes[i+1][j].setColor(Color.red);
-                }
-                if(j < nodes.length - 1  && nodes[i][j].hasColumnConstraint() && !nodes[i][j].checkNextColumnValue(nodes[i][j+1].getValue())){
-                    nodes[i][j].setColor(Color.red);
-                    nodes[i][j+1].setColor(Color.red);
+
+                    if(i < nodes.length - 1 && nodes[i][j].hasRowConstraint() && !nodes[i][j].checkNextRowValue(nodes[i+1][j].getValue())){
+                        nodes[i][j].setRowConstraintColor(Color.red);
+                    }
+                    if(j < nodes.length - 1  && nodes[i][j].hasColumnConstraint() && !nodes[i][j].checkNextColumnValue(nodes[i][j+1].getValue())){
+                        nodes[i][j].setColumnConstraintColor(Color.red);
+                    }
                 }
             }
         }
+        System.out.println("check completed");
         return valid;
     }
     
