@@ -184,7 +184,6 @@ public class Futoshiki extends javax.swing.JFrame {
     }
     
     private void print(){
-        Random rd = new Random();
         gamePanel.removeAll();
         gamePanel.revalidate();
         gamePanel.repaint();
@@ -252,22 +251,6 @@ public class Futoshiki extends javax.swing.JFrame {
                         if(nodes[i][j].isInitial()){
                             valeur.setEditable(false);
                         }else {
-                            /*valeur.addActionListener(new java.awt.event.ActionListener() {
-                                int i = x;
-                                int j = y;
-                                public int val(){
-                                    try{
-                                        return Integer.parseInt(valeur.getText());
-                                    }catch(Exception e){
-                                        return 0;
-                                    }
-                                }
-                                
-                                public void actionPerformed(java.awt.event.ActionEvent e) {
-                                    changeValue(i, j, val());
-                                }
-                                
-                            });*/
                             
                             valeur.getDocument().addDocumentListener(new DocumentListener() {
                                 int i = x;
