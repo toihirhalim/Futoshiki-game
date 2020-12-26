@@ -10,10 +10,13 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
-import java.util.Random;
+import javafx.geometry.Rectangle2D;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
@@ -168,7 +171,7 @@ public class Futoshiki extends javax.swing.JFrame {
             sizeBoard = N * 70;
             nodes = game.getGame(N);
             print();
-            //game.saveGame(nodes);
+            game.saveGame(nodes);
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
     
@@ -230,9 +233,9 @@ public class Futoshiki extends javax.swing.JFrame {
                         columnConstraintPanel.add(columnConstraintLabel);
                     }
                     if(nodes[i][j].hasRowConstraint()){
-                        JLabel rowConstraintLabel = new JLabel(nodes[i][j].getRowConstraint());
+                        JLabel rowConstraintLabel = new RotateLabel(nodes[i][j].getRowConstraint());
                         rowConstraintLabel.setFont(f);
-                        rowConstraintLabel.setBounds(8,0, 40, 30);
+                        rowConstraintLabel.setBounds(2,5, 40, 30);
                         rowConstraintLabel.setForeground(nodes[i][j].getRowConstraintColor());
                         rowConstraintPanel.add(rowConstraintLabel);
                     }
@@ -342,4 +345,17 @@ public class Futoshiki extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
+    private class RotateLabel extends JLabel {
+      public RotateLabel(String text) {
+         super(text);
+      }
+      @Override
+      public void paintComponent(Graphics g) {
+         Graphics2D gx = (Graphics2D) g;
+         gx.rotate(1.5708, 20, 15);
+         super.paintComponent(g);
+      }
+   }
+
 }
