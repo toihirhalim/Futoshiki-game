@@ -10,9 +10,15 @@ package metier;
  *
  * @author Toihir
  */
+
+/*
+catte classe contien des games par defefaut a chaque nombre choisi
+*/
 public class Default {
     
     public static Node [][] getGame(int N){
+        
+        //creer les cases (nodes)
         Node [][] nodes = new Node[N][N];
         
         for(int i = 0; i < nodes.length; i++){
@@ -21,6 +27,8 @@ public class Default {
                 nodes[i][j].setInitial(false);
             }
         }
+        
+        // configurer parraport au choix du nombre N
         switch(N){
             case 4: 
                 nodes[0][3].setDefaultValue(3);

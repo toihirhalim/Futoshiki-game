@@ -42,14 +42,14 @@ public class Futoshiki extends javax.swing.JFrame {
     public Futoshiki() {
         initComponents();
         gamePanel = new JPanel();
-        nodes = game.getLastGame();
+        nodes = game.getLastGame();         // prendre la derniere partie arreté ou celui par defaut
         N = nodes.length;
         jComboBox1.setSelectedIndex(N - 4);
         sizeBoard = N * 70;
         jPanel2.add(gamePanel);
         gamePanel.setBounds(20, 20, sizeBoard, sizeBoard);
         gamePanel.setBackground(Color.white);
-        print();
+        print();                            // afficher la partie
     }
 
     /**
@@ -176,7 +176,7 @@ public class Futoshiki extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
     
     private void changeValue(int i, int j, int value){
-        
+        // changer la valeur d une case si la valeur est valide ( [1 - N] )
         if(value >= 0 && value <= N){
             if(value != nodes[i][j].getValue()){
                 nodes[i][j].setValue(value);
@@ -186,7 +186,9 @@ public class Futoshiki extends javax.swing.JFrame {
         }
     }
     
+    // fonction qui affiche une partie 
     private void print(){
+        
         gamePanel.removeAll();
         gamePanel.revalidate();
         gamePanel.repaint();
@@ -203,7 +205,7 @@ public class Futoshiki extends javax.swing.JFrame {
         int line = (650 - sizeBoard) /2 + 20;
         gamePanel.setBounds(line, line, sizeBoard, sizeBoard);
         if(nodes != null){
-            game.checkGame(nodes);
+            game.checkGame(nodes);      // assistance des erreurs a chaque affiche s une partie
             for(int i = 0 ; i < nodes.length; i++){
                 for(int j = 0; j < nodes.length; j++){
                     JPanel nodePanel = new JPanel();
@@ -225,6 +227,7 @@ public class Futoshiki extends javax.swing.JFrame {
                     columnConstraintPanel.setLayout(null);
                     rowConstraintPanel.setLayout(null);
                     
+                    //affiche de la contrainte a droite si il existe
                     if(nodes[i][j].hasColumnConstraint()){
                         JLabel columnConstraintLabel = new JLabel(nodes[i][j].getColumnConstraint());
                         columnConstraintLabel.setFont(f);
@@ -232,6 +235,7 @@ public class Futoshiki extends javax.swing.JFrame {
                         columnConstraintLabel.setForeground(nodes[i][j].getColumnConstraintColor());
                         columnConstraintPanel.add(columnConstraintLabel);
                     }
+                    //affiche de la contrainte en bas si il existe
                     if(nodes[i][j].hasRowConstraint()){
                         JLabel rowConstraintLabel = new RotateLabel(nodes[i][j].getRowConstraint());
                         rowConstraintLabel.setFont(f);
@@ -252,6 +256,7 @@ public class Futoshiki extends javax.swing.JFrame {
                         
                         valeur.setForeground(nodes[i][j].getColor());
                         if(nodes[i][j].isInitial()){
+                            //les cases initiales sont inchangables
                             valeur.setEditable(false);
                         }else {
                             
@@ -328,6 +333,7 @@ public class Futoshiki extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        //initialiser la base de donne
         DataBase.initialize();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -346,6 +352,7 @@ public class Futoshiki extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
+    //classe de rotation des contraintes
     private class RotateLabel extends JLabel {
       public RotateLabel(String text) {
          super(text);

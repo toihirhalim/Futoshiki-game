@@ -20,6 +20,12 @@ import java.util.List;
  *
  * @author Toihir
  */
+
+/*
+ cette classe agit comme base de donné de forme xml 
+peux enregistrer et reload un game
+*/
+
 public class DataBase {
     static Document document;
     static Element racine;
@@ -27,6 +33,7 @@ public class DataBase {
     static String fichier = "games.xml";
     static String game = "game";
     
+    //prendre le fichier xml s'il existe ou le créer
     public static void initialize() {
         try {
             lireFichier();
@@ -37,29 +44,43 @@ public class DataBase {
             enregistre();
         }
     }
+    
+    //enregistrer le fichier
     static void enregistre() {
         try {
             XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
             sortie.output(document, new FileOutputStream(fichier));
         } catch (java.io.IOException e) {}
     }
+    
+    //lire le fichier
     static void lireFichier() throws Exception {
         SAXBuilder sxb = new SAXBuilder();
         document = sxb.build(new File(fichier));
         racine = document.getRootElement();
     }
+    //ajouter un game au fichier
     static boolean ajouterGame(Node [][] nodes) {
         try {
-            String Id = "" + nodes.length;
+            String Id = "" + nodes.length; //chaque game est representé par ses nombre de cases
             Element game = getGame(Id);
+            
+            //supprimer s'il existe deja une avec le meme ID (nombre de cases)
             if(game != null){
                 racine.removeContent(game);
             }
+            
             game = new Element("game");
             Attribute id = new Attribute("id", "" + nodes.length);
             game.setAttribute(id);
+            
+            //ajouter tous les nodes a l element (game) 
             for(int i = 0; i  < nodes.length ; i++){
                 for(int j = 0; j < nodes.length; j++){
+                    
+                    /*
+                        un element node contient ses position comme attributs (i, j) et valeur , contraintes et initiale comme elements
+                    */
                     Element node = new Element("node");
                     game.addContent(node);
                     Attribute x = new Attribute("x", "" + i);
@@ -87,6 +108,8 @@ public class DataBase {
         }
         return true;
     }
+    
+    //recherche d une element (game) par l'id (nombre de cases)
     static Element getGame(String id) {
         List<Element> games = racine.getChildren(game);
         Iterator<Element> i = games.iterator();
@@ -102,8 +125,10 @@ public class DataBase {
                 return courant;
             }
         }
+        //par defaut on retourne le deriner
         return last;
     }
+    //transformer un element en une game
     static Node [][] toGame(Element game) {
         try{
             List<Element> nodesElement = game.getChildren("node");
@@ -111,8 +136,10 @@ public class DataBase {
             
             String n = game.getAttributeValue("id");
             int N = Integer.parseInt(n);
+            //creation desq nodes
             Node [][] nodes = new Node[N][N];
             
+            //on remplit les valeurs et les contraintes des nodes
             while (i.hasNext()) {
                 Element courant = (Element) i.next();
                 String x = courant.getAttributeValue("x");
@@ -134,14 +161,14 @@ public class DataBase {
     }
     
     
-    
+    //enregister un game
     public static boolean saveGame(Node [][] nodes){
         initialize();
         ajouterGame(nodes);
         enregistre();
         return true;
     }
-    
+    //prendre un game deja enregistré
     public static Node [][] getGame(int N){
         initialize();
         String Id = "" + N;
@@ -152,7 +179,7 @@ public class DataBase {
         }
         return null;
     }
-    
+    //prendre le dernier game a etre enregistré
     public static Node [][] getLastGame(){
         initialize();
         Element game = getGame("0");

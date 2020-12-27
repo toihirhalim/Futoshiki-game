@@ -11,19 +11,28 @@ import java.awt.Color;
  *
  * @author Toihir
  */
+
+/*
+    cette classe represente une case du jeu 
+    il contien en generale  une valeur 
+    et la possibilité d avoir 2 contraintes a droite ou en bas 
+*/
+
 public class Node {
     
     public static String sup = ">";
     public static String inf = "<";
     
-    private int value;
-    private Color color;
-    private Color rowConstraintColor;
-    private Color columnConstraintColor;
-    private String rowConstraint;
-    private String columnConstraint;
-    private boolean initial = false;
+    private int value;                      // valeur de la case
+    private Color color;                    // couleur de la case
+    private Color rowConstraintColor;       // contrainte en bas
+    private Color columnConstraintColor;    // couleur du contrainte en bas
+    private String rowConstraint;           // contrainte a droite
+    private String columnConstraint;        // couleur du contrainte a droite
+    private boolean initial = false;        // si la case contient une valeure initiale
 
+    
+    // constructeurs, getters et setters et quelques fonction de test sur les  contraintes
     public Node() { }   
     public Node(String value, String rowConstraint, String columnConstraint, String initial) {
         int val;
@@ -118,20 +127,27 @@ public class Node {
     public boolean hasConstraint(){
         return this.hasColumnConstraint() || this.hasRowConstraint();
     }    
+    
+    // fonction qui valide la contrainte sur l 'element de la ligne suivante
     public boolean checkNextRowValue(int nextVal){
         if(this.hasRowConstraint() && nextVal != 0){
             return this.rowConstraint.equals(inf) ? this.value < nextVal : this.value > nextVal;
         }
         return true;
     }    
+    
+    // fonction qui valide la contrainte sur l 'element de la colone suivante
     public boolean checkNextColumnValue(int nextVal){
         if(this.hasColumnConstraint() && nextVal != 0){
             return this.columnConstraint.equals(inf) ? this.value < nextVal : this.value > nextVal;
         }
         return true;
     }    
+    
+    // fonction qui valide les contraintes sur tous les cotés d une case
     public boolean validConstraint(Node top, Node left, Node bottom, Node right,int val){
         boolean test = true;
+        
         if(top != null && top.getValue() != 0 && top.hasRowConstraint()){
             test =  top.rowConstraint.equals(inf)? top.value < val : top.value > val;
             if(!test) return test;
