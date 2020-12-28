@@ -29,7 +29,6 @@ public class Game {
         }
         return nodes;
     }
-    
     public Node [][] getLastGame(){
         //on prend la derniere partie joué
         Node [][] nodes = DataBase.getLastGame();
@@ -48,27 +47,22 @@ public class Game {
                 nodes[i][j] = new Node();
             }
         }
-        
         //valeurs initiales
         for(int i = 0; i < rd.nextInt(N); i++){
             nodes[rd.nextInt(N)][rd.nextInt(N)].setDefaultValue(rd.nextInt(N) + 1);
         }
-        
         // contrantes > a droites 
         for(int i = 0; i < rd.nextInt(N); i++){
             nodes[rd.nextInt(N)][rd.nextInt(N -1)].setColumnConstraint(">");
         }
-        
         //contraintes < a droite
         for(int i = 0; i < rd.nextInt(N); i++){
             nodes[rd.nextInt(N)][rd.nextInt(N -1)].setColumnConstraint("<");
         }
-        
         // contrantes > en bas 
         for(int i = 0; i < rd.nextInt(N); i++){
             nodes[rd.nextInt(N -1)][rd.nextInt(N)].setRowConstraint(">");
         }
-        
         //contraintes < en bas
         for(int i = 0; i < rd.nextInt(N); i++){
             nodes[rd.nextInt(N -1)][rd.nextInt(N)].setRowConstraint("<");
@@ -83,7 +77,8 @@ public class Game {
     }
     public void getInitialGame(Node [][] nodes){
         /*
-        prendre la partie initiale en eliminant tous les cases qui ne sont pas initiales
+        prendre la partie initiale en eliminant
+        tous les cases qui ne sont pas initiales
         */
         for(int i = 0; i  < nodes.length ; i++){
             for(int j = 0; j < nodes.length; j++){
@@ -99,6 +94,7 @@ public class Game {
     }
     public boolean solve(Node [][] nodes){
         //resoudre une partie
+        getInitialGame(nodes);
         return Backtracking.solve(nodes, 0, 0);
     }
     
@@ -112,6 +108,7 @@ public class Game {
                 if(nodes[i][j].isInitial()) nodes[i][j].setColor(Color.black);
                 else nodes[i][j].setColor(Color.green);
                 
+                //on colore tous les signes <> en noir
                 nodes[i][j].setColumnConstraintColor(Color.black);
                 nodes[i][j].setRowConstraintColor(Color.black);
             }
@@ -123,7 +120,8 @@ public class Game {
                 if(val < 1 || val > nodes.length){
                     valid = false;
                 }else{
-                    //pour chaque case on colore tous les cases a valeurs repeté dans la meme ligne en rouge
+                    //pour chaque case on colore tous les cases a valeurs
+                    //repeté dans la meme ligne en rouge
                     for(int k = j + 1; k < nodes.length; k++){
                         if(nodes[i][j].getValue() == nodes[i][k].getValue()){
                             nodes[i][j].setColor(Color.red);
@@ -131,7 +129,8 @@ public class Game {
                             valid = false;
                         }
                     }
-                    //pour chaque case on colore tous les cases a valeurs repeté dans la meme colone en rouge
+                    //pour chaque case on colore tous les cases a valeurs
+                    //repeté dans la meme colone en rouge
                     for(int k = i + 1; k < nodes.length; k++){
                         if(nodes[i][j].getValue() == nodes[k][j].getValue()){
                             nodes[i][j].setColor(Color.red);
@@ -140,12 +139,16 @@ public class Game {
                         }
                     }
                     
-                    //si une case contient une contraine non valide avec la valeur suivant en bas on colore sa contraine en rouge 
-                    if(i < nodes.length - 1 && nodes[i][j].hasRowConstraint() && !nodes[i][j].checkNextRowValue(nodes[i+1][j].getValue())){
+                    //si une case contient une contraine non valide avec la valeur 
+                    //suivant en bas on colore sa contraine en rouge 
+                    if(i < nodes.length - 1 && nodes[i][j].hasRowConstraint() 
+                            && !nodes[i][j].checkNextRowValue(nodes[i+1][j].getValue())){
                         nodes[i][j].setRowConstraintColor(Color.red);
                     }
-                    //si une case contient une contraine non valide avec la valeur suivant a droite on colore sa contraine en rouge 
-                    if(j < nodes.length - 1  && nodes[i][j].hasColumnConstraint() && !nodes[i][j].checkNextColumnValue(nodes[i][j+1].getValue())){
+                    //si une case contient une contraine non valide avec la valeur
+                    //suivant a droite on colore sa contraine en rouge 
+                    if(j < nodes.length - 1  && nodes[i][j].hasColumnConstraint() 
+                            && !nodes[i][j].checkNextColumnValue(nodes[i][j+1].getValue())){
                         nodes[i][j].setColumnConstraintColor(Color.red);
                     }
                 }

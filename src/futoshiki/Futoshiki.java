@@ -10,13 +10,11 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.MaskFormatter;
-import javafx.geometry.Rectangle2D;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
@@ -157,7 +155,6 @@ public class Futoshiki extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // generate Solution
-        game.getInitialGame(nodes);
         game.solve(nodes);
         game.checkGame(nodes);
         print();

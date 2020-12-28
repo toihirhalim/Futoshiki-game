@@ -43,16 +43,14 @@ public class DataBase {
             document.addContent(racine);
             enregistre();
         }
-    }
-    
+    }   
     //enregistrer le fichier
     static void enregistre() {
         try {
             XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
             sortie.output(document, new FileOutputStream(fichier));
         } catch (java.io.IOException e) {}
-    }
-    
+    }   
     //lire le fichier
     static void lireFichier() throws Exception {
         SAXBuilder sxb = new SAXBuilder();
@@ -107,8 +105,7 @@ public class DataBase {
             return false;
         }
         return true;
-    }
-    
+    }   
     //recherche d une element (game) par l'id (nombre de cases)
     static Element getGame(String id) {
         List<Element> games = racine.getChildren(game);
@@ -159,7 +156,6 @@ public class DataBase {
             return null;
         }
     }
-    
     
     //enregister un game
     public static boolean saveGame(Node [][] nodes){
