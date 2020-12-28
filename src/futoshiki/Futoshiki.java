@@ -40,6 +40,7 @@ public class Futoshiki extends javax.swing.JFrame {
     
     
     public Futoshiki() {
+        this.setTitle("FUTOSHIKI");
         initComponents();
         gamePanel = new JPanel();
         nodes = game.getLastGame();         // prendre la derniere partie arreté ou celui par defaut

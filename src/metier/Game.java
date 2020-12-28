@@ -6,6 +6,7 @@
 package metier;
 
 import java.awt.Color;
+import java.util.Random;
 /**
  *
  * @author Toihir
@@ -40,6 +41,7 @@ public class Game {
         return nodes;
     }
     public Node [][] random(int N){
+        Random rd = new Random();
         Node [][] nodes = new Node[N][N];
         for(int i = 0; i  < nodes.length ; i++){
             for(int j = 0; j < nodes.length; j++){
@@ -47,9 +49,31 @@ public class Game {
             }
         }
         
-        /*
-            generate here random constraint
-        */
+        //valeurs initiales
+        for(int i = 0; i < rd.nextInt(N); i++){
+            nodes[rd.nextInt(N)][rd.nextInt(N)].setDefaultValue(rd.nextInt(N) + 1);
+        }
+        
+        // contrantes > a droites 
+        for(int i = 0; i < rd.nextInt(N); i++){
+            nodes[rd.nextInt(N)][rd.nextInt(N -1)].setColumnConstraint(">");
+        }
+        
+        //contraintes < a droite
+        for(int i = 0; i < rd.nextInt(N); i++){
+            nodes[rd.nextInt(N)][rd.nextInt(N -1)].setColumnConstraint("<");
+        }
+        
+        // contrantes > en bas 
+        for(int i = 0; i < rd.nextInt(N); i++){
+            nodes[rd.nextInt(N -1)][rd.nextInt(N)].setRowConstraint(">");
+        }
+        
+        //contraintes < en bas
+        for(int i = 0; i < rd.nextInt(N); i++){
+            nodes[rd.nextInt(N -1)][rd.nextInt(N)].setRowConstraint("<");
+        }
+        
         return nodes;
         /*Node [][] copy = nodes;
         if(Backtracking.solve(copy, 0, 0)){
