@@ -13,8 +13,6 @@ import java.util.Random;
  */
 public class Game {
     
-    Node [][] nodes;
-    
     public Game(){}
     
     // creer un game de N
@@ -25,7 +23,7 @@ public class Game {
         // on retourne celui par defaut
         
         if(nodes == null){
-            nodes = Default.getGame(N);
+            nodes = getDefaultGame(N);
         }
         return nodes;
     }
@@ -35,7 +33,7 @@ public class Game {
         
         //si non on retourne celui par defaut de 4*4 cases
         if(nodes == null){
-            nodes = Default.getGame(4);
+            nodes = getDefaultGame(4);
         }
         return nodes;
     }
@@ -87,6 +85,9 @@ public class Game {
                 }
             }
         }
+    }
+    public Node [][] getDefaultGame(int N){
+        return Default.getGame(N);
     }
     public void saveGame(Node [][] nodes){
         //enregistrer une partie 

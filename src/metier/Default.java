@@ -143,6 +143,15 @@ public class Default {
                 nodes[7][6].setDefaultValue(5);
                 nodes[7][8].setDefaultValue(2);
                 nodes[8][2].setDefaultValue(2);
+                
+                nodes[0][2].setDefaultValue(9);
+                nodes[1][1].setDefaultValue(1);
+                nodes[2][4].setDefaultValue(9);
+                nodes[3][8].setDefaultValue(6);
+                nodes[6][1].setDefaultValue(4);
+                nodes[0][8].setDefaultValue(3);
+                nodes[3][3].setDefaultValue(7);
+                
                 nodes[0][6].setRowConstraint(">");
                 nodes[0][7].setRowConstraint(">");
                 nodes[1][8].setRowConstraint(">");
@@ -172,7 +181,6 @@ public class Default {
                 nodes[7][4].setColumnConstraint(">");
                 nodes[8][1].setColumnConstraint(">");
                 nodes[8][7].setColumnConstraint(">");
-                
                 nodes[0][0].setColumnConstraint("<");
                 nodes[3][0].setColumnConstraint("<");
                 nodes[3][3].setColumnConstraint("<");
@@ -183,6 +191,7 @@ public class Default {
                 nodes[6][6].setColumnConstraint("<");
                 nodes[6][7].setColumnConstraint("<");
                 nodes[8][2].setColumnConstraint("<");
+                
                 break;
             default: 
                 return null;
