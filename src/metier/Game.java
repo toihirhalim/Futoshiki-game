@@ -39,7 +39,7 @@ public class Game {
     }
     public Node [][] random(int N){
         Random rd = new Random();
-        Node [][] nodes = null;
+        Node [][] nodes;
         int counter = 0;
         
         while(counter < 3){
@@ -70,32 +70,23 @@ public class Game {
             }
             
             if(Backtracking.solve(nodes, 0, 0)){
-                
+               for(int i = 0; i  < N * 4; i++){
+                   int x = rd.nextInt(N);
+                   int y= rd.nextInt(N);
+                   
+                   if(rd.nextInt(2) == 0 && x != N-1){ // row constraint
+                       nodes[x][y].setRowConstraint(nodes[x][y].getValue() > nodes[x + 1][y].getValue() ? ">" : "<");
+                   }else if(y != N-1){ // culumn constaint
+                       nodes[x][y].setColumnConstraint(nodes[x][y].getValue() > nodes[x][y + 1].getValue() ? ">" : "<");
+                   }
+               } 
         
-                
                 getInitialGame(nodes);
                 return nodes;
             }
             
             counter++;
         }
-        
-        /*// contrantes > a droites 
-        for(int i = 0; i < rd.nextInt(N); i++){
-            nodes[rd.nextInt(N)][rd.nextInt(N -1)].setColumnConstraint(">");
-        }
-        //contraintes < a droite
-        for(int i = 0; i < rd.nextInt(N); i++){
-            nodes[rd.nextInt(N)][rd.nextInt(N -1)].setColumnConstraint("<");
-        }
-        // contrantes > en bas 
-        for(int i = 0; i < rd.nextInt(N); i++){
-            nodes[rd.nextInt(N -1)][rd.nextInt(N)].setRowConstraint(">");
-        }
-        //contraintes < en bas
-        for(int i = 0; i < rd.nextInt(N); i++){
-            nodes[rd.nextInt(N -1)][rd.nextInt(N)].setRowConstraint("<");
-        }*/
         
         return getDefaultGame(N);
         
