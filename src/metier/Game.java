@@ -39,17 +39,48 @@ public class Game {
     }
     public Node [][] random(int N){
         Random rd = new Random();
-        Node [][] nodes = new Node[N][N];
-        for(int i = 0; i  < nodes.length ; i++){
-            for(int j = 0; j < nodes.length; j++){
-                nodes[i][j] = new Node();
+        Node [][] nodes = null;
+        int counter = 0;
+        
+        while(counter < 3){
+            nodes = new Node[N][N];
+            
+            for(int i = 0; i  < nodes.length ; i++){
+                for(int j = 0; j < nodes.length; j++){
+                    nodes[i][j] = new Node();
+                }
             }
+            
+            //initial values
+            for(int i = 0; i < rd.nextInt(N + 3); i++){
+                int value = rd.nextInt(N) + 1;
+                int x = rd.nextInt(N);
+                int y = rd.nextInt(N);
+                boolean found = false;
+                
+                for(int j = 0; j <nodes.length; j++){
+                    if((j != y && nodes[x][j].getValue() == value) || (j != x && nodes[j][y].getValue() == value)){
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found){
+                    nodes[x][y].setDefaultValue(value);
+                }
+            }
+            
+            if(Backtracking.solve(nodes, 0, 0)){
+                
+        
+                
+                getInitialGame(nodes);
+                return nodes;
+            }
+            
+            counter++;
         }
-        //valeurs initiales
-        for(int i = 0; i < rd.nextInt(N); i++){
-            nodes[rd.nextInt(N)][rd.nextInt(N)].setDefaultValue(rd.nextInt(N) + 1);
-        }
-        // contrantes > a droites 
+        
+        /*// contrantes > a droites 
         for(int i = 0; i < rd.nextInt(N); i++){
             nodes[rd.nextInt(N)][rd.nextInt(N -1)].setColumnConstraint(">");
         }
@@ -64,14 +95,10 @@ public class Game {
         //contraintes < en bas
         for(int i = 0; i < rd.nextInt(N); i++){
             nodes[rd.nextInt(N -1)][rd.nextInt(N)].setRowConstraint("<");
-        }
+        }*/
         
-        return nodes;
-        /*Node [][] copy = nodes;
-        if(Backtracking.solve(copy, 0, 0)){
-            return nodes;
-        }
-        return null;*/
+        return getDefaultGame(N);
+        
     }
     public void getInitialGame(Node [][] nodes){
         /*
