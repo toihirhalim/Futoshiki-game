@@ -39,39 +39,57 @@ public class Game {
     }
     public Node [][] random(int N){
         Random rd = new Random();
-        Node [][] nodes = new Node[N][N];
-        for(int i = 0; i  < nodes.length ; i++){
-            for(int j = 0; j < nodes.length; j++){
-                nodes[i][j] = new Node();
+        Node [][] nodes;
+        int counter = 0;
+        
+        while(counter < 3){
+            nodes = new Node[N][N];
+            
+            for(int i = 0; i  < nodes.length ; i++){
+                for(int j = 0; j < nodes.length; j++){
+                    nodes[i][j] = new Node();
+                }
             }
-        }
-        //valeurs initiales
-        for(int i = 0; i < rd.nextInt(N); i++){
-            nodes[rd.nextInt(N)][rd.nextInt(N)].setDefaultValue(rd.nextInt(N) + 1);
-        }
-        // contrantes > a droites 
-        for(int i = 0; i < rd.nextInt(N); i++){
-            nodes[rd.nextInt(N)][rd.nextInt(N -1)].setColumnConstraint(">");
-        }
-        //contraintes < a droite
-        for(int i = 0; i < rd.nextInt(N); i++){
-            nodes[rd.nextInt(N)][rd.nextInt(N -1)].setColumnConstraint("<");
-        }
-        // contrantes > en bas 
-        for(int i = 0; i < rd.nextInt(N); i++){
-            nodes[rd.nextInt(N -1)][rd.nextInt(N)].setRowConstraint(">");
-        }
-        //contraintes < en bas
-        for(int i = 0; i < rd.nextInt(N); i++){
-            nodes[rd.nextInt(N -1)][rd.nextInt(N)].setRowConstraint("<");
+            
+            //initial values
+            for(int i = 0; i < rd.nextInt(N + 3); i++){
+                int value = rd.nextInt(N) + 1;
+                int x = rd.nextInt(N);
+                int y = rd.nextInt(N);
+                boolean found = false;
+                
+                for(int j = 0; j <nodes.length; j++){
+                    if((j != y && nodes[x][j].getValue() == value) || (j != x && nodes[j][y].getValue() == value)){
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found){
+                    nodes[x][y].setDefaultValue(value);
+                }
+            }
+            
+            if(Backtracking.solve(nodes, 0, 0)){
+               for(int i = 0; i  < N * 4; i++){
+                   int x = rd.nextInt(N);
+                   int y= rd.nextInt(N);
+                   
+                   if(rd.nextInt(2) == 0 && x != N-1){ // row constraint
+                       nodes[x][y].setRowConstraint(nodes[x][y].getValue() > nodes[x + 1][y].getValue() ? ">" : "<");
+                   }else if(y != N-1){ // culumn constaint
+                       nodes[x][y].setColumnConstraint(nodes[x][y].getValue() > nodes[x][y + 1].getValue() ? ">" : "<");
+                   }
+               } 
+        
+                getInitialGame(nodes);
+                return nodes;
+            }
+            
+            counter++;
         }
         
-        return nodes;
-        /*Node [][] copy = nodes;
-        if(Backtracking.solve(copy, 0, 0)){
-            return nodes;
-        }
-        return null;*/
+        return getDefaultGame(N);
+        
     }
     public void getInitialGame(Node [][] nodes){
         /*
