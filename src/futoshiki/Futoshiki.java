@@ -92,7 +92,7 @@ public class Futoshiki extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Default");
+        jButton3.setText("Clear");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -108,11 +108,11 @@ public class Futoshiki extends javax.swing.JFrame {
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addComponent(jButton2)
-                .addGap(55, 55, 55)
-                .addComponent(jButton3)
-                .addGap(54, 54, 54)
+                .addGap(74, 74, 74)
                 .addComponent(jButton1)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(jButton3)
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,8 +186,7 @@ public class Futoshiki extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        nodes = game.getDefaultGame(N);
-        game.checkGame(nodes);
+        game.getInitialGame(nodes);
         print();
     }//GEN-LAST:event_jButton3ActionPerformed
     
