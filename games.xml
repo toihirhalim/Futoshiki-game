@@ -1542,50 +1542,50 @@
   </game>
   <game id="4">
     <node x="0" y="0">
-      <value>2</value>
-      <rowConstraint>&gt;</rowConstraint>
-      <columnConstraint />
+      <value>1</value>
+      <rowConstraint />
+      <columnConstraint>&lt;</columnConstraint>
       <initial>false</initial>
     </node>
     <node x="0" y="1">
-      <value>4</value>
+      <value>2</value>
       <rowConstraint />
       <columnConstraint />
       <initial>false</initial>
     </node>
     <node x="0" y="2">
-      <value>1</value>
-      <rowConstraint />
+      <value>3</value>
+      <rowConstraint>&lt;</rowConstraint>
       <columnConstraint />
       <initial>false</initial>
     </node>
     <node x="0" y="3">
-      <value>3</value>
+      <value>4</value>
       <rowConstraint />
       <columnConstraint />
-      <initial>true</initial>
+      <initial>false</initial>
     </node>
     <node x="1" y="0">
-      <value>1</value>
+      <value>2</value>
       <rowConstraint />
       <columnConstraint />
       <initial>false</initial>
     </node>
     <node x="1" y="1">
-      <value>3</value>
-      <rowConstraint>&gt;</rowConstraint>
+      <value>1</value>
+      <rowConstraint />
       <columnConstraint />
       <initial>false</initial>
     </node>
     <node x="1" y="2">
-      <value>2</value>
+      <value>4</value>
       <rowConstraint />
-      <columnConstraint>&lt;</columnConstraint>
+      <columnConstraint>&gt;</columnConstraint>
       <initial>false</initial>
     </node>
     <node x="1" y="3">
-      <value>4</value>
-      <rowConstraint />
+      <value>3</value>
+      <rowConstraint>&gt;</rowConstraint>
       <columnConstraint />
       <initial>false</initial>
     </node>
@@ -1596,19 +1596,19 @@
       <initial>false</initial>
     </node>
     <node x="2" y="1">
-      <value>2</value>
-      <rowConstraint>&gt;</rowConstraint>
-      <columnConstraint />
+      <value>3</value>
+      <rowConstraint>&lt;</rowConstraint>
+      <columnConstraint>&gt;</columnConstraint>
       <initial>false</initial>
     </node>
     <node x="2" y="2">
-      <value>3</value>
+      <value>1</value>
       <rowConstraint />
       <columnConstraint />
       <initial>true</initial>
     </node>
     <node x="2" y="3">
-      <value>1</value>
+      <value>2</value>
       <rowConstraint />
       <columnConstraint />
       <initial>false</initial>
@@ -1617,22 +1617,22 @@
       <value>3</value>
       <rowConstraint />
       <columnConstraint />
-      <initial>false</initial>
+      <initial>true</initial>
     </node>
     <node x="3" y="1">
-      <value>1</value>
+      <value>4</value>
       <rowConstraint />
-      <columnConstraint />
+      <columnConstraint>&gt;</columnConstraint>
       <initial>false</initial>
     </node>
     <node x="3" y="2">
-      <value>4</value>
+      <value>2</value>
       <rowConstraint />
-      <columnConstraint />
+      <columnConstraint>&gt;</columnConstraint>
       <initial>false</initial>
     </node>
     <node x="3" y="3">
-      <value>2</value>
+      <value>1</value>
       <rowConstraint />
       <columnConstraint />
       <initial>false</initial>
