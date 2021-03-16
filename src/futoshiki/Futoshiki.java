@@ -36,6 +36,7 @@ public class Futoshiki extends javax.swing.JFrame {
     int N;
     int level;
     int sizeBoard;
+    boolean printWinText = false;
     
     
     public Futoshiki() {
@@ -71,6 +72,7 @@ public class Futoshiki extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,15 +151,24 @@ public class Futoshiki extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel2.setForeground(new java.awt.Color(0, 204, 0));
+        jLabel2.setText("Congratulation you did it yay !");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(238, 238, 238)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 648, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(623, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -189,6 +200,7 @@ public class Futoshiki extends javax.swing.JFrame {
         // generate Solution
         game.solve(nodes);
         game.checkGame(nodes);
+        printWinText = false;
         print();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -218,12 +230,11 @@ public class Futoshiki extends javax.swing.JFrame {
     
     private void changeValue(int i, int j, int value){
         // changer la valeur d une case si la valeur est valide ( [1 - N] )
-        if(value >= 0 && value <= N){
-            if(value != nodes[i][j].getValue()){
-                nodes[i][j].setValue(value);
-                print();
-                game.saveGame(nodes);
-            }
+        printWinText = true;
+        if(value >= 0 && value <= N && value != nodes[i][j].getValue()){
+            nodes[i][j].setValue(value);
+            print();
+            game.saveGame(nodes);
         }
     }
     
@@ -246,7 +257,12 @@ public class Futoshiki extends javax.swing.JFrame {
         int line = (650 - sizeBoard) /2 + 20;
         gamePanel.setBounds(line, line, sizeBoard, sizeBoard);
         if(nodes != null){
-            game.checkGame(nodes);      // assistance des erreurs a chaque affiche s une partie
+            if(game.checkGame(nodes) && printWinText){// assistance des erreurs a chaque affiche s une partie
+                jLabel2.setText("Congratulation you did it yay !");
+            }else {
+                jLabel2.setText("");
+            }
+            
             for(int i = 0 ; i < nodes.length; i++){
                 for(int j = 0; j < nodes.length; j++){
                     JPanel nodePanel = new JPanel();
@@ -392,6 +408,7 @@ public class Futoshiki extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
