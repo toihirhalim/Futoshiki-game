@@ -37,7 +37,7 @@ public class Game {
         }
         return nodes;
     }
-    public Node [][] random(int N){
+    public Node [][] random(int N, int level){
         Random rd = new Random();
         Node [][] nodes;
         int counter = 0;
@@ -70,7 +70,7 @@ public class Game {
             }
             
             if(Backtracking.solve(nodes, 0, 0)){
-               for(int i = 0; i  < N * 4; i++){
+               for(int i = 0; i  < N * level; i++){
                    int x = rd.nextInt(N);
                    int y= rd.nextInt(N);
                    

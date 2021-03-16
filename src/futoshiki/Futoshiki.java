@@ -34,6 +34,7 @@ public class Futoshiki extends javax.swing.JFrame {
     Game game = new Game();
     Node [][] nodes;
     int N;
+    int level;
     int sizeBoard;
     
     
@@ -43,7 +44,9 @@ public class Futoshiki extends javax.swing.JFrame {
         gamePanel = new JPanel();
         nodes = game.getLastGame();         // prendre la derniere partie arreté ou celui par defaut
         N = nodes.length;
+        level = 2;
         jComboBox1.setSelectedIndex(N - 4);
+        jComboBox2.setSelectedIndex(level - 2);
         sizeBoard = N * 70;
         jPanel2.add(gamePanel);
         gamePanel.setBounds(20, 20, sizeBoard, sizeBoard);
@@ -65,6 +68,8 @@ public class Futoshiki extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -99,20 +104,34 @@ public class Futoshiki extends javax.swing.JFrame {
             }
         });
 
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Easy", "Normal", "Hard" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Level :");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addGap(51, 51, 51)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(41, 41, 41)
                 .addComponent(jButton2)
-                .addGap(74, 74, 74)
+                .addGap(50, 50, 50)
                 .addComponent(jButton1)
-                .addGap(49, 49, 49)
+                .addGap(42, 42, 42)
                 .addComponent(jButton3)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addGap(61, 61, 61))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +141,9 @@ public class Futoshiki extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -160,7 +181,7 @@ public class Futoshiki extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //generate new game
-        nodes = game.random(N);
+        nodes = game.random(N, level);
         print();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -189,6 +210,11 @@ public class Futoshiki extends javax.swing.JFrame {
         game.getInitialGame(nodes);
         print();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+        level = jComboBox2.getSelectedIndex() + 2;
+    }//GEN-LAST:event_jComboBox2ActionPerformed
     
     private void changeValue(int i, int j, int value){
         // changer la valeur d une case si la valeur est valide ( [1 - N] )
@@ -364,6 +390,8 @@ public class Futoshiki extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
